@@ -49,7 +49,7 @@ async function onFriendShip(friendship) {
  */
 async function onMessage(msg) {
   // 默认消息回复
-  await defaultMessage(msg, bot)
+  // await defaultMessage(msg, bot)
   // 消息分片
   // await shardingMessage(msg,bot)
 }
