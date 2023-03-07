@@ -16,3 +16,5 @@ export const oldCommodityWhiteList = [
     '茅台',
     '小茅'
 ];
+
+
