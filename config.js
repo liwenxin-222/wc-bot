@@ -1,8 +1,18 @@
 // 定义机器人的名称，这里是为了防止群聊消息太多，所以只有艾特机器人才会回复，
-export const botName = '荣顶'
+export const botName = 'wenxin'
 
 // 群聊白名单，白名单内的群聊才会自动回复
-export const roomWhiteList = ['群名称']
+export const roomWhiteList = ['巽风商城']
 
 // 联系人白名单，白名单内的联系人才会自动回复
-export const aliasWhiteList = ['备注名或微信名', '张三', '李四']
+export const aliasWhiteList = ['我自己', 'WenXin']
+
+
+export const oldCommodityWhiteList = [
+    '53%vol',
+    '玉兔呈祥',
+    '茅小凌',
+    '茅台冰淇淋',
+    '茅台',
+    '小茅'
+];

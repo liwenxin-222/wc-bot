@@ -4,6 +4,7 @@ import { Configuration, OpenAIApi } from 'openai'
 import dotenv from 'dotenv'
 const env = dotenv.config().parsed // 环境参数
 
+console.log(env);
 const configuration = new Configuration({
   apiKey: env.OPENAI_API_KEY,
 })

@@ -1,6 +1,8 @@
 import { WechatyBuilder, ScanStatus, log } from 'wechaty'
 import qrTerminal from 'qrcode-terminal'
 import { defaultMessage, shardingMessage } from './sendMessage.js'
+import {initXunFeng} from '../gameXunFeng/index.js';
+
 // 扫码
 function onScan(qrcode, status) {
   if (status === ScanStatus.Waiting || status === ScanStatus.Timeout) {
@@ -14,11 +16,14 @@ function onScan(qrcode, status) {
 }
 
 // 登录
-function onLogin(user) {
+async function onLogin(user) {
   console.log(`${user} has logged in`)
   const date = new Date()
   console.log(`Current time:${date}`)
-  console.log(`Automatic robot chat mode has been activated`)
+  console.log(`Automatic robot chat mode has been activated`);
+  setTimeout(async () => {
+    await initXunFeng(bot);
+  }, 2000)
 }
 
 // 登出
