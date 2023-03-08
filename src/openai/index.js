@@ -2,11 +2,19 @@ import { remark } from 'remark'
 import stripMarkdown from 'strip-markdown'
 import { Configuration, OpenAIApi } from 'openai'
 import dotenv from 'dotenv'
+import httpsProxyAgent from 'https-proxy-agent';
+
 const env = dotenv.config().parsed // 环境参数
 
 console.log(env);
+
+var agent = new httpsProxyAgent("http://localhost:7890");
+
 const configuration = new Configuration({
   apiKey: env.OPENAI_API_KEY,
+  baseOptions: {
+    httpsAgent: agent,
+  }
 })
 const openai = new OpenAIApi(configuration)
 
@@ -21,6 +29,8 @@ export async function getOpenAiReply(prompt) {
     frequency_penalty: 0.0,
     presence_penalty: 0.6,
     stop: [' Human:', ' AI:'],
+  }, {
+    httpsAgent: agent,
   })
 
   const reply = markdownToText(response.data.choices[0].text)

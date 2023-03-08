@@ -49,7 +49,7 @@ async function onFriendShip(friendship) {
  */
 async function onMessage(msg) {
   // 默认消息回复
-  // await defaultMessage(msg, bot)
+  await defaultMessage(msg, bot)
   // 消息分片
   // await shardingMessage(msg,bot)
 }
@@ -73,7 +73,9 @@ bot.on('login', onLogin)
 // 登出
 bot.on('logout', onLogout)
 // 收到消息
-bot.on('message', onMessage)
+setTimeout(() => {
+  bot.on('message', onMessage)
+}, 20000)
 // 添加好友
 bot.on('friendship', onFriendShip)
 
