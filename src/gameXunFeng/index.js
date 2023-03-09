@@ -86,7 +86,14 @@ export async function initXunFeng(bot) {
     
       try {
       
-        ['麦当劳在逃鸡翅'].forEach(async (txtName) => {
+        [
+          '麦当劳在逃鸡翅',
+          // '文创套装2',
+          '文创套装3',
+          '文创套装4',
+          '文创套装5',
+          '文创套装6',
+        ].forEach(async (txtName) => {
           let contact =
               (await bot.Contact.find({name: txtName})) ||
               (await bot.Contact.find({alias: txtName})) // 获取你要发送的联系人
