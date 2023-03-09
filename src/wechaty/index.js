@@ -75,7 +75,7 @@ bot.on('logout', onLogout)
 // 收到消息
 setTimeout(() => {
   bot.on('message', onMessage)
-}, 20000)
+}, 60000)
 // 添加好友
 bot.on('friendship', onFriendShip)
 

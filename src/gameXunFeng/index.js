@@ -42,7 +42,7 @@ export async function initXunFeng(bot) {
       let str = '上新品了！！！！！！！！ <br>  ';
       newCommodity.forEach((item) => {
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-        str += `<br>名称：${item.name} <br>价格：${price} <br>-------`
+        str += `<br>名称：${item.name} <br>价格：${price} <br>库存：${item.inventory} <br>-------`
       })
       
       try {

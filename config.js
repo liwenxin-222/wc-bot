@@ -15,7 +15,9 @@ export const oldCommodityWhiteList = [
     '茅小凌',
     '茅台冰淇淋',
     '茅台',
-    '小茅'
+    '小茅',
+    '小巽',
+    '巽风'
 ];
 
 
