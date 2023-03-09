@@ -93,6 +93,8 @@ export async function initXunFeng(bot) {
           '文创套装4',
           '文创套装5',
           '文创套装6',
+          '文创套装7',
+          '文创套装8',
         ].forEach(async (txtName) => {
           let contact =
               (await bot.Contact.find({name: txtName})) ||
