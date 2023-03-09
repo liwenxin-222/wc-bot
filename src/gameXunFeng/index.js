@@ -10,6 +10,8 @@ export async function initXunFeng(bot) {
     let logMsg
     
     let newCommodity = [];
+    let maidanglaoNewCommodity = [];
+
     try {
       const listRes = await getMtList();
       
@@ -19,6 +21,10 @@ export async function initXunFeng(bot) {
         list.forEach((itemCommodity) => {
           
           let isHas = false;
+          
+          if (itemCommodity.name.includes('文创套装')) {
+            maidanglaoNewCommodity.push(itemCommodity);
+          }
           
           for (let i = 0; i < oldCommodityWhiteList.length; i++) {
             if (itemCommodity.name.includes(oldCommodityWhiteList[i])) {
@@ -69,6 +75,32 @@ export async function initXunFeng(bot) {
         logMsg = e.message
       }
     }
+    
+    // 麦当劳在逃鸡翅
+    if (maidanglaoNewCommodity.length > 0) {
+      let str = '上新品了！！！！！！！！ <br>  ';
+      maidanglaoNewCommodity.forEach((item) => {
+        const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
+        str += `<br>名称：${item.name} <br>价格：${price} <br>库存：${item.inventory} <br>-------`
+      })
+    
+      try {
+      
+        ['麦当劳在逃鸡翅'].forEach(async (txtName) => {
+          let contact =
+              (await bot.Contact.find({name: txtName})) ||
+              (await bot.Contact.find({alias: txtName})) // 获取你要发送的联系人
+        
+          if (contact) {
+            await contact.say(str) // 发送消息
+          }
+        });
+        console.log(oldCommodityWhiteList, newCommodity, 77777);
+      } catch (e) {
+        logMsg = e.message
+      }
+    }
+    
     
     console.log(logMsg)
     
