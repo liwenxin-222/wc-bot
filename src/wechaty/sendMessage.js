@@ -44,7 +44,7 @@ export async function defaultMessage(msg, bot) {
       console.log(remarkName, 999)
       if (!room) {
         if (remarkName === '我自己') {
-          await room.say('系统正常！')
+          await contact.say('系统正常！')
         }
         // await contact.say(await getReply(trimed));
         // await contact.say('系统正常！');
