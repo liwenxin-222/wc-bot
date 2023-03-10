@@ -42,7 +42,9 @@ export async function defaultMessage(msg, bot) {
       // 私人聊天，白名单内的直接发送
       // if (isAlias && !room) {
       if (!room) {
-        
+        if (remarkName === '我自己') {
+          await room.say('系统正常！')
+        }
         // await contact.say(await getReply(trimed));
         // await contact.say('系统正常！');
       }
