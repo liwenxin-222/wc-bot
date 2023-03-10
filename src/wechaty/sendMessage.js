@@ -33,7 +33,9 @@ export async function defaultMessage(msg, bot) {
       // 区分群聊和私聊
       if (isRoom && room) {
         // await room.say(await getReply(trimed.replace(`${botName}`, '')))
-        await room.say('系统正常！')
+        if (remarkName === '我自己') {
+          await room.say('系统正常！')
+        }
         return
       }
   
@@ -42,7 +44,7 @@ export async function defaultMessage(msg, bot) {
       if (!room) {
         
         // await contact.say(await getReply(trimed));
-        await contact.say('系统正常！');
+        // await contact.say('系统正常！');
       }
     } catch (e) {
       console.error(e)
