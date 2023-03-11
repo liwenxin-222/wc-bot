@@ -93,7 +93,6 @@ export async function initXunFeng(bot) {
           '文创套装4',
           '文创套装5',
           '文创套装6',
-          '文创套装7',
           '文创套装8',
           '文创套装9',
           '文创套装10',
