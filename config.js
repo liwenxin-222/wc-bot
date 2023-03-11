@@ -20,6 +20,8 @@ export const aliasWhiteList = [
     '折扣7',
     '折扣8',
     '折扣9',
+    '折扣10',
+    '折扣11',
 
 ]
 
