@@ -1,0 +1,18 @@
+{
+  "--begin--": "该设备为随机生成，丢失后不能得到原先配置",
+  "product": "ILPP-AF0F9",
+  "device": "CFA44",
+  "board": "ACD1B",
+  "brand": "E244",
+  "model": "ILPP E841",
+  "wifi_ssid": "HUAWEI-fb93338",
+  "bootloader": "U-boot",
+  "android_id": "IL.5418624.4667",
+  "boot_id": "f1ecd6a3-e84b-28e5-350c-5e2706af7887",
+  "proc_version": "Linux version 5.10.101-android12-3e3a27d4",
+  "mac_address": "2D:CA:BA:AB:EB:BB",
+  "ip_address": "192.168.15.33",
+  "imei": "865086260231969",
+  "incremental": "E1FEC0B899",
+  "--end--": "修改后可能需要重新验证设备。"
+}

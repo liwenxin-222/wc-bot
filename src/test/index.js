@@ -34,7 +34,7 @@ function getProJectSn(api_key, user_sn, user_name) {
     url: 'https://aicall.easemob.com/api/templatelist',
     data: {
       pageIndex: 0,
-      pageSize: 1,
+      pageSize: 5,
       api_key,
       user_sn,
       // api_key,
@@ -55,15 +55,15 @@ function getAiUserDatasapi(api_key, user_sn, user_name) {
       api_key,
       user_sn,
       "pageIndex": "0",
-      "pageSize": "1",
+      "pageSize": "5",
       // user_name,
     }
   })
 }
 
 
-function addJson({sn, api_key, project_sn, user_sn}) {
-  console.log(sn, api_key, project_sn, 7777)
+function addJson({ai_user_sn, api_key, project_sn, user_sn}) {
+  console.log(user_sn, project_sn, ai_user_sn, api_key, 7777)
   return axios({
     method: 'post',
     url: 'https://aicall.easemob.com/api/addJson',
@@ -85,12 +85,26 @@ function addJson({sn, api_key, project_sn, user_sn}) {
       api_key: api_key,
       project_sn: project_sn,
       fail_recall_of_reason: "关机,来电提醒,稍后再拨,停机,无法接通,正在通话中,用户正忙,用户拒 接,欠费,无人应答,其他",
-      "ai_user_sn":user_sn,
+      ai_user_sn:ai_user_sn,
       "is_zidong":"on",
       "source":"YBXBY18908025356",
       client_info_json: {
         data: [
-          { "姓名":"test1", "电话":"17600110526", "地址":"北京" }
+          { "姓名":"test0", "电话":"18203248349", "地址":"河北" },
+          // { "姓名":"test1", "电话":"19538888984", "地址":"上海" },
+          // { "姓名":"test2", "电话":"15608630786", "地址":"武汉" },
+          // { "姓名":"test3", "电话":"13873390348", "地址":"湖南" },
+          // { "姓名":"test4", "电话":"15618229178", "地址":"上海" },
+          // { "姓名":"test5", "电话":"15097693672", "地址":"福建" },
+          // { "姓名":"test6", "电话":"15620609088", "地址":"天津" },
+          // { "姓名":"test7", "电话":"15880968903", "地址":"福州" },
+          // { "姓名":"test8", "电话":"13704053182", "地址":"沈阳" },
+          // { "姓名":"test9", "电话":"13602353198", "地址":"东莞" },
+          // { "姓名":"test10", "电话":"13801977361", "地址":"上海" },
+          // { "姓名":"test11", "电话":"15910406111", "地址":"北京" },
+          // { "姓名":"test12", "电话":"18278768001", "地址":"广州" },
+          // { "姓名":"test13", "电话":"18105700132", "地址":"浙江" },
+          // { "姓名":"test14", "电话":"15902373713", "地址":"重庆" },
         ]
       },
     }
@@ -99,25 +113,30 @@ function addJson({sn, api_key, project_sn, user_sn}) {
 async function init() {
   const agentRes = await login();
   
-  console.log(agentRes.data)
+  // console.log(agentRes.data)
   if (agentRes.data.code === 0 ) {
     const {api_key, user_sn, user_name} = agentRes.data.data;
     
+    console.log(agentRes.data.data, 111)
+    //  模板
     const proJectSnRes = await getProJectSn(api_key, user_sn);
-    const [sn_index1] = proJectSnRes.data.data;
-    console.log(1111, sn_index1)
-    const sn = sn_index1.sn;
+    const [,,,sn_index1] = proJectSnRes.data.data;
+    console.log(proJectSnRes.data.data, 2222)
+    const project_sn = sn_index1.sn;
     
+    //  子账号
     const subAgentRes = await getAiUserDatasapi(api_key, user_sn, user_name);
-    const [project_sn_index1] = subAgentRes.data.data;
-    const project_sn = project_sn_index1.project_sn.split(',')[0];
+    const [, ,ai_sn_index1] = subAgentRes.data.data;
+    console.log(subAgentRes.data.data, 33333)
+    
+    const ai_user_sn = ai_sn_index1.user_sn;
     
   //    打电话
     const addJsonRes = await addJson({
-      sn,
       user_sn,
-      api_key,
       project_sn,
+      ai_user_sn,
+      api_key,
     });
     
     
@@ -127,4 +146,4 @@ async function init() {
   
 }
 
-init();
+// init();
