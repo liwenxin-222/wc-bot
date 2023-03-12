@@ -11,6 +11,7 @@ export const aliasWhiteList = [
     'WenXin',
     '文创套装2',
     '文创套装7',
+    '文创套装9',
     '折扣1',
     '折扣2',
     '折扣3',
