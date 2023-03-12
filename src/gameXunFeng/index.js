@@ -5,7 +5,7 @@ import {aliasWhiteList, botName, roomWhiteList, oldCommodityWhiteList} from '../
 export async function initXunFeng(bot) {
   console.log(`定时任务已启动`);
   // let oldCommodityWhiteList = Object.assign([], oldCommodityWhiteList);
-  setSchedule('0/20 * * * * ?', async () => {
+  setSchedule('30 * * * * *', async () => {
     
     let logMsg
     
