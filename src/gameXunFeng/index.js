@@ -1,11 +1,19 @@
 import {setSchedule} from './schedule/index.js';
 import {getMtList} from './data/index.js';
 import {aliasWhiteList, botName, roomWhiteList, oldCommodityWhiteList} from '../../config.js'
+import {aiCallInit} from '../aiCall/index.js';
 
 export async function initXunFeng(bot) {
-  console.log(`定时任务已启动`);
+  let calledFlag = false;
+  console.log(`定时任务已启动`, `今天电话通知：${calledFlag ? '已通知' : '未通知'}`);
+  
+  // 每天凌晨更新电话flag
+  setSchedule('0 0 0 * * ? *', async () => {
+    calledFlag = false;
+  });
+  
   // let oldCommodityWhiteList = Object.assign([], oldCommodityWhiteList);
-  setSchedule('30 * * * * *', async () => {
+  setSchedule('0/10 * * * * ?', async () => {
     
     let logMsg
     
@@ -44,7 +52,21 @@ export async function initXunFeng(bot) {
       logMsg = e.message;
     }
     console.log(newCommodity, 1111)
+    
     if (newCommodity.length > 0) {
+      
+      //  电话通知
+      try {
+        
+        if (!calledFlag) {
+          calledFlag = true;
+          aiCallInit();
+        }
+       
+      } catch (e) {
+        logMsg = e.message
+      }
+      
       let str = '上新品了！！！！！！！！ <br>  ';
       newCommodity.forEach((item) => {
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
