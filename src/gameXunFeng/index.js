@@ -20,7 +20,7 @@ export async function initXunFeng(bot) {
     let newCommodity = [];
     let maidanglaoNewCommodity = [];
     let gongyipanAndxiangfenji = [];
-
+    
     try {
       const listRes = await getMtList();
       
@@ -36,7 +36,7 @@ export async function initXunFeng(bot) {
           }
           
           if (
-              (itemCommodity.name.includes('工艺盘') && itemCommodity.inventory > 0)  ||
+              (itemCommodity.name.includes('工艺盘') && itemCommodity.inventory > 0) ||
               (itemCommodity.name.includes('香氛机') && itemCommodity.inventory > 0)
           ) {
             gongyipanAndxiangfenji.push(itemCommodity)
@@ -59,7 +59,7 @@ export async function initXunFeng(bot) {
     } catch (e) {
       logMsg = e.message;
     }
-    console.log(newCommodity, 1111)
+    console.log(newCommodity, maidanglaoNewCommodity, gongyipanAndxiangfenji, 1111)
     
     if (newCommodity.length > 0) {
       
@@ -70,7 +70,7 @@ export async function initXunFeng(bot) {
           calledFlag = true;
           aiCallInit();
         }
-       
+        
       } catch (e) {
         logMsg = e.message
       }
@@ -113,9 +113,9 @@ export async function initXunFeng(bot) {
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
         str += `<br>名称：${item.name} <br>价格：${price} <br>库存：${item.inventory} <br>-------`
       })
-    
-      try {
       
+      try {
+        
         [
           '麦当劳在逃鸡翅',
           // '文创套装2',
@@ -131,7 +131,7 @@ export async function initXunFeng(bot) {
           let contact =
               (await bot.Contact.find({name: txtName})) ||
               (await bot.Contact.find({alias: txtName})) // 获取你要发送的联系人
-        
+          
           if (contact) {
             await contact.say(str) // 发送消息
           }
@@ -141,33 +141,33 @@ export async function initXunFeng(bot) {
         logMsg = e.message
       }
     }
-  
+    
     if (gongyipanAndxiangfenji.length > 0) {
       let str = '盘子或者香氛机更新库存！！！！！ <br>  ';
       gongyipanAndxiangfenji.forEach((item) => {
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
         str += `<br>名称：${item.name} <br>价格：${price} <br>库存：${item.inventory} <br>-------`
       })
-    
+      
       try {
-  
+        
         aliasWhiteList.forEach(async (txtName) => {
           let contact =
               (await bot.Contact.find({name: txtName})) ||
               (await bot.Contact.find({alias: txtName})) // 获取你要发送的联系人
-    
+          
           if (contact) {
             await contact.say(str) // 发送消息
           }
         });
-  
+        
         roomWhiteList.forEach(async (txtName) => {
           let room = (await bot.Room.find({topic: txtName}));
           if (room) {
             await room.say(str) // 发送消息
           }
         });
-  
+        
         console.log(gongyipanAndxiangfenji, newCommodity, 77777);
       } catch (e) {
         logMsg = e.message
