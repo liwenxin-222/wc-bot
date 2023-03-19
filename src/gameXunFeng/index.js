@@ -13,12 +13,13 @@ export async function initXunFeng(bot) {
   });
   
   // let oldCommodityWhiteList = Object.assign([], oldCommodityWhiteList);
-  setSchedule('0/10 * * * * ?', async () => {
+  setSchedule('0/5 * * * * ?', async () => {
     
     let logMsg
     
     let newCommodity = [];
     let maidanglaoNewCommodity = [];
+    let gongyipanAndxiangfenji = [];
 
     try {
       const listRes = await getMtList();
@@ -32,6 +33,13 @@ export async function initXunFeng(bot) {
           
           if (itemCommodity.name.includes('文创套装')) {
             maidanglaoNewCommodity.push(itemCommodity);
+          }
+          
+          if (
+              (itemCommodity.name.includes('工艺盘') && itemCommodity.inventory > 0)  ||
+              (itemCommodity.name.includes('香氛机') && itemCommodity.inventory > 0)
+          ) {
+            gongyipanAndxiangfenji.push(itemCommodity)
           }
           
           for (let i = 0; i < oldCommodityWhiteList.length; i++) {
@@ -129,6 +137,38 @@ export async function initXunFeng(bot) {
           }
         });
         console.log(oldCommodityWhiteList, newCommodity, 77777);
+      } catch (e) {
+        logMsg = e.message
+      }
+    }
+  
+    if (gongyipanAndxiangfenji.length > 0) {
+      let str = '盘子或者香氛机更新库存！！！！！ <br>  ';
+      gongyipanAndxiangfenji.forEach((item) => {
+        const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
+        str += `<br>名称：${item.name} <br>价格：${price} <br>库存：${item.inventory} <br>-------`
+      })
+    
+      try {
+  
+        aliasWhiteList.forEach(async (txtName) => {
+          let contact =
+              (await bot.Contact.find({name: txtName})) ||
+              (await bot.Contact.find({alias: txtName})) // 获取你要发送的联系人
+    
+          if (contact) {
+            await contact.say(str) // 发送消息
+          }
+        });
+  
+        roomWhiteList.forEach(async (txtName) => {
+          let room = (await bot.Room.find({topic: txtName}));
+          if (room) {
+            await room.say(str) // 发送消息
+          }
+        });
+  
+        console.log(gongyipanAndxiangfenji, newCommodity, 77777);
       } catch (e) {
         logMsg = e.message
       }
