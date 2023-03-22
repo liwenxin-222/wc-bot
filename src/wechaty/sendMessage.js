@@ -1,5 +1,5 @@
 // import { getChatGPTReply as getReply } from '../chatgpt/index.js'
-import { getOpenAiReply as getReply } from '../openai/index.js'
+// import { getOpenAiReply as getReply } from '../openai/index.js'
 import { botName, roomChatWhiteList, aliasWhiteList } from '../../config.js'
 
 /**
