@@ -37,7 +37,7 @@ export const oldCommodityWhiteList = [
     '小巽',
     '巽风',
     '香氛机',
-    // '盛世玉兰'
+    '盛世玉兰'
 ];
 
 

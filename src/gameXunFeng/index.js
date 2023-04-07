@@ -57,16 +57,16 @@ export async function initXunFeng(bot) {
   
   
         //  电话通知
-        // try {
-        //
-        //   if (!calledFlag) {
-        //     calledFlag = true;
-        //     aiCallInit();
-        //   }
-        //
-        // } catch (e) {
-        //   //   e
-        // }
+        try {
+
+          if (!calledFlag) {
+            calledFlag = true;
+            aiCallInit();
+          }
+
+        } catch (e) {
+          //   e
+        }
   
       }
      
