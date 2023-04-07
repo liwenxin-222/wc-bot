@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 
 export async function wutouApi(callback) {
   // 1. 打开浏览器
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
   
   // 2. 新建一个标签页
   const page = await browser.newPage()
