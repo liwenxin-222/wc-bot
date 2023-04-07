@@ -2,9 +2,14 @@ import {setSchedule} from './schedule/index.js';
 import {getMtList} from './data/index.js';
 import {aliasWhiteList, botName, roomWhiteList, oldCommodityWhiteList} from '../../config.js'
 import {aiCallInit} from '../aiCall/index.js';
+import {wutouApi} from './data/wutou.js';
+import {SendDingTalk, SendDingTalkMarkdown} from '../sendDingTalk/index.js';
+
+
 
 export async function initXunFeng(bot) {
   let calledFlag = false;
+  let currentStr = '';
   console.log(`定时任务已启动`, `今天电话通知：${calledFlag ? '已通知' : '未通知'}`);
   
   // 每天凌晨更新电话flag
@@ -12,170 +17,62 @@ export async function initXunFeng(bot) {
     calledFlag = false;
   });
   
-  // let oldCommodityWhiteList = Object.assign([], oldCommodityWhiteList);
-  setSchedule('0/5 * * * * ?', async () => {
-    
-    let logMsg
-    
+  
+  wutouApi(function (list) {
     let newCommodity = [];
-    let maidanglaoNewCommodity = [];
-    let gongyipanAndxiangfenji = [];
     
-    try {
-      const listRes = await getMtList();
+    list.forEach((itemCommodity) => {
       
-      if (listRes.data.code === 0) {
-        const list = listRes.data.data.list;
-        
-        list.forEach((itemCommodity) => {
-          
-          let isHas = false;
-          
-          if (itemCommodity.name.includes('文创套装')) {
-            maidanglaoNewCommodity.push(itemCommodity);
-          }
-          
-          if (
-              (itemCommodity.name.includes('工艺盘') && itemCommodity.inventory > 0) ||
-              (itemCommodity.name.includes('香氛机') && itemCommodity.inventory > 0)
-          ) {
-            gongyipanAndxiangfenji.push(itemCommodity)
-          }
-          
-          for (let i = 0; i < oldCommodityWhiteList.length; i++) {
-            if (itemCommodity.name.includes(oldCommodityWhiteList[i])) {
-              // oldCommodityWhiteListClone.push(itemCommodity.name);
-              isHas = true;
-              break;
-            }
-          }
-          
-          if (!isHas) {
-            newCommodity.push(itemCommodity);
-          }
-        })
-        
+      const orName = itemCommodity.name;
+      let afterName = itemCommodity.name;
+  
+      oldCommodityWhiteList.forEach((wkk) => {
+        afterName = afterName.replace(wkk, '');
+      });
+      
+      if (orName === afterName && itemCommodity.inventory) {
+        newCommodity.push(itemCommodity);
       }
-    } catch (e) {
-      logMsg = e.message;
-    }
-    console.log(newCommodity, maidanglaoNewCommodity, gongyipanAndxiangfenji, 1111)
+      
+    });
     
+    console.log(list.length, newCommodity, 66666);
+  
     if (newCommodity.length > 0) {
-      
-      //  电话通知
-      try {
-        
-        if (!calledFlag) {
-          calledFlag = true;
-          aiCallInit();
-        }
-        
-      } catch (e) {
-        logMsg = e.message
-      }
-      
-      let str = '上新品了！！！！！！！！ <br>  ';
+    
+      let str = '### 上新品了！！！！！！！！\n ';
       newCommodity.forEach((item) => {
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-        str += `<br>名称：${item.name} <br>价格：${price} <br>库存：${item.inventory} <br>-------`
+        str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n-------\n`
       })
       
-      try {
-        
-        aliasWhiteList.forEach(async (txtName) => {
-          let contact =
-              (await bot.Contact.find({name: txtName})) ||
-              (await bot.Contact.find({alias: txtName})) // 获取你要发送的联系人
+      if (currentStr !== str) {
+        try {
+          currentStr = str;
+          console.log('已发送钉钉消息');
+          SendDingTalkMarkdown(str);
+        } catch (e) {
+          console.log(e);
+        }
+  
+  
+        //  电话通知
+        try {
           
-          if (contact) {
-            await contact.say(str) // 发送消息
+          if (!calledFlag) {
+            calledFlag = true;
+            aiCallInit();
           }
-        });
-        
-        roomWhiteList.forEach(async (txtName) => {
-          let room = (await bot.Room.find({topic: txtName}));
-          if (room) {
-            await room.say(str) // 发送消息
-          }
-        });
-        
-        console.log(oldCommodityWhiteList, newCommodity, 66666);
-      } catch (e) {
-        logMsg = e.message
+    
+        } catch (e) {
+          //   e
+        }
+  
       }
+     
     }
-    
-    // 麦当劳在逃鸡翅
-    if (maidanglaoNewCommodity.length > 0) {
-      let str = '上新品了！！！！！！！！ <br>  ';
-      maidanglaoNewCommodity.forEach((item) => {
-        const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-        str += `<br>名称：${item.name} <br>价格：${price} <br>库存：${item.inventory} <br>-------`
-      })
-      
-      try {
-        
-        [
-          '麦当劳在逃鸡翅',
-          // '文创套装2',
-          '文创套装3',
-          '文创套装4',
-          '文创套装5',
-          '文创套装6',
-          '文创套装8',
-          '文创套装9',
-          '文创套装10',
-          '文创套装11',
-        ].forEach(async (txtName) => {
-          let contact =
-              (await bot.Contact.find({name: txtName})) ||
-              (await bot.Contact.find({alias: txtName})) // 获取你要发送的联系人
-          
-          if (contact) {
-            await contact.say(str) // 发送消息
-          }
-        });
-        console.log(oldCommodityWhiteList, newCommodity, 77777);
-      } catch (e) {
-        logMsg = e.message
-      }
-    }
-    
-    if (gongyipanAndxiangfenji.length > 0) {
-      let str = '盘子或者香氛机更新库存！！！！！ <br>  ';
-      gongyipanAndxiangfenji.forEach((item) => {
-        const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-        str += `<br>名称：${item.name} <br>价格：${price} <br>库存：${item.inventory} <br>-------`
-      })
-      
-      try {
-        
-        aliasWhiteList.forEach(async (txtName) => {
-          let contact =
-              (await bot.Contact.find({name: txtName})) ||
-              (await bot.Contact.find({alias: txtName})) // 获取你要发送的联系人
-          
-          if (contact) {
-            await contact.say(str) // 发送消息
-          }
-        });
-        
-        roomWhiteList.forEach(async (txtName) => {
-          let room = (await bot.Room.find({topic: txtName}));
-          if (room) {
-            await room.say(str) // 发送消息
-          }
-        });
-        
-        console.log(gongyipanAndxiangfenji, newCommodity, 77777);
-      } catch (e) {
-        logMsg = e.message
-      }
-    }
-    
-    
-    console.log(logMsg)
     
   })
+  
 }
+initXunFeng();
