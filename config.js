@@ -30,14 +30,14 @@ export const aliasWhiteList = [
 export const oldCommodityWhiteList = [
     '53%vol',
     // '玉兔呈祥',
-    '茅小凌',
+    // '茅小凌',
     // '茅台冰淇淋',
     '茅台',
-    '小茅',
+    // '小茅',
     '小巽',
     '巽风',
-    '香氛机',
-    '盛世玉兰'
+    // '香氛机',
+    // '盛世玉兰'
 ];
 
 
