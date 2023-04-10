@@ -5,9 +5,11 @@ import ChatBot from 'dingtalk-robot-sender';
 
 const robot = new ChatBot({
   webhook: 'https://oapi.dingtalk.com/robot/send?access_token=129c31e21e1e324d7ac160976cde05e83d547e503d8e447fb2f87fa58a261fcb'
-  // webhook: 'https://oapi.dingtalk.com/robot/send?access_token=db700aae6fb9ff30ee7f9f7965853f8fc014717964eb972dbd20ec2dc59eb42d'
 });
 
+const robotXunF = new ChatBot({
+  webhook: 'https://oapi.dingtalk.com/robot/send?access_token=db700aae6fb9ff30ee7f9f7965853f8fc014717964eb972dbd20ec2dc59eb42d'
+});
 
 export const SendDingTalk = (text, {isAtAll = false} = {}) => {
 
@@ -48,5 +50,6 @@ export const SendDingTalkMarkdown = (text, {isAtAll = false} = {}) => {
     console.log('通知失败')
   });
   
+  robotXunF.text(text)
 }
 // SendDingTalk('上新。哈哈哈哈哈哈哈哈哈')
