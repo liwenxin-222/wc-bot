@@ -76,20 +76,20 @@ export async function initXunFeng(bot) {
         }
         
         //  电话通知
-        // if (
-        //     (newCommodity.length > 0)
-        // ) {
-        //   try {
-        //
-        //     if (!calledFlag) {
-        //       calledFlag = true;
-        //       aiCallInit();
-        //     }
-        //
-        //   } catch (e) {
-        //     //   e
-        //   }
-        // }
+        if (
+            (newCommodity.length > 0)
+        ) {
+          try {
+
+            if (!calledFlag) {
+              calledFlag = true;
+              aiCallInit();
+            }
+
+          } catch (e) {
+            //   e
+          }
+        }
       }
     
     }

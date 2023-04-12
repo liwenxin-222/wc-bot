@@ -40,15 +40,15 @@ export const SendDingTalkMarkdown = (text, {isAtAll = false} = {}) => {
     webhook: 'https://oapi.dingtalk.com/robot/send?access_token=db700aae6fb9ff30ee7f9f7965853f8fc014717964eb972dbd20ec2dc59eb42d'
   });
 // 发送钉钉消息
-//   robot.markdown('商城上新通知', text, {
-//
-//   })
-//   .then((res) => {
-//     // TODO
-//     console.log('通知成功')
-//   }, () => {
-//     console.log('通知失败')
-//   });
+  robot.markdown('商城上新通知', text, {
+
+  })
+  .then((res) => {
+    // TODO
+    console.log('通知成功')
+  }, () => {
+    console.log('通知失败')
+  });
   
   robotXunF.text(text)
 }
