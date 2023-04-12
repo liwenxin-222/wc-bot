@@ -20,6 +20,7 @@ export async function initXunFeng(bot) {
   
   wutouApi(function (list) {
     let newCommodity = [];
+    let kucunGengxin = [];
     
     list.forEach((itemCommodity) => {
       
@@ -34,18 +35,38 @@ export async function initXunFeng(bot) {
         newCommodity.push(itemCommodity);
       }
       
+      if (itemCommodity.inventory > 5) {
+        kucunGengxin.push(itemCommodity);
+      }
+      
+      
+      
     });
     
-    console.log(list.length, newCommodity, 66666);
+    console.log(list.length, newCommodity,kucunGengxin, 66666);
   
-    if (newCommodity.length > 0) {
+    // if (newCommodity.length > 0) {
+    //     //  电话通知
+    //     try {
+    //
+    //       if (!calledFlag) {
+    //         calledFlag = true;
+    //         aiCallInit();
+    //       }
+    //
+    //     } catch (e) {
+    //       //   e
+    //     }
+    // }
+    
+    if (kucunGengxin.length > 0) {
     
       let str = '### 集市上新品了！！！！！！！！\n ';
-      newCommodity.forEach((item) => {
+      kucunGengxin.forEach((item) => {
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
         str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n-------\n`
       })
-      
+    
       if (currentStr !== str) {
         try {
           currentStr = str;
@@ -54,22 +75,8 @@ export async function initXunFeng(bot) {
         } catch (e) {
           console.log(e);
         }
-  
-  
-        //  电话通知
-        try {
-
-          if (!calledFlag) {
-            calledFlag = true;
-            aiCallInit();
-          }
-
-        } catch (e) {
-          //   e
-        }
-  
       }
-     
+    
     }
     
   })
