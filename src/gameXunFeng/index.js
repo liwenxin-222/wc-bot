@@ -57,17 +57,18 @@ export async function initXunFeng(bot) {
         str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n-------\n`
       })
       
-      //  第一次不通知
-      if (first) {
-        first = false;
-        return;
-      }
-    
       if (
           currentStr !== str
       ) {
         try {
           currentStr = str;
+          //  第一次不通知
+          if (first) {
+            first = false;
+            
+            console.log('第一次不通知');
+            return;
+          }
           console.log('已发送钉钉消息');
           SendDingTalkMarkdown(str);
         } catch (e) {
@@ -75,20 +76,20 @@ export async function initXunFeng(bot) {
         }
         
         //  电话通知
-        if (
-            (newCommodity.length > 0)
-        ) {
-          try {
-      
-            if (!calledFlag) {
-              calledFlag = true;
-              aiCallInit();
-            }
-      
-          } catch (e) {
-            //   e
-          }
-        }
+        // if (
+        //     (newCommodity.length > 0)
+        // ) {
+        //   try {
+        //
+        //     if (!calledFlag) {
+        //       calledFlag = true;
+        //       aiCallInit();
+        //     }
+        //
+        //   } catch (e) {
+        //     //   e
+        //   }
+        // }
       }
     
     }
