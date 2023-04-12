@@ -30,7 +30,7 @@ export async function initXunFeng(bot) {
         afterName = afterName.replace(wkk, '');
       });
       
-      if (orName === afterName && itemCommodity.inventory) {
+      if (orName === afterName && (itemCommodity.inventory > 5)) {
         newCommodity.push(itemCommodity);
       }
       
