@@ -6,10 +6,17 @@ import {wutouApi} from './data/wutou.js';
 import {SendDingTalkMarkdown} from '../sendDingTalk/index.js';
 
 
+let first = true;
+
+setTimeout(function () {
+  first = false;
+}, 10000);
 
 export async function initXunFeng(bot) {
   let calledFlag = false;
   let currentStr = '';
+
+  
   console.log(`定时任务已启动`, `今天电话通知：${calledFlag ? '已通知' : '未通知'}`);
   
   // 每天凌晨更新电话flag
@@ -45,19 +52,19 @@ export async function initXunFeng(bot) {
     
     console.log(list.length, newCommodity,kucunGengxin, 66666);
   
-    // if (newCommodity.length > 0) {
-    //     //  电话通知
-    //     try {
-    //
-    //       if (!calledFlag) {
-    //         calledFlag = true;
-    //         aiCallInit();
-    //       }
-    //
-    //     } catch (e) {
-    //       //   e
-    //     }
-    // }
+    if ((newCommodity.length > 0) && !first) {
+        //  电话通知
+        try {
+
+          if (!calledFlag) {
+            calledFlag = true;
+            aiCallInit();
+          }
+
+        } catch (e) {
+          //   e
+        }
+    }
     
     if (kucunGengxin.length > 0) {
     
