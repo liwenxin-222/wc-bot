@@ -6,16 +6,11 @@ import {wutouApi} from './data/wutou.js';
 import {SendDingTalkMarkdown} from '../sendDingTalk/index.js';
 
 
-let first = true;
-
-setTimeout(function () {
-  first = false;
-}, 10000);
 
 export async function initXunFeng(bot) {
   let calledFlag = false;
   let currentStr = '';
-
+  let first = true;
   
   console.log(`定时任务已启动`, `今天电话通知：${calledFlag ? '已通知' : '未通知'}`);
   
@@ -52,19 +47,7 @@ export async function initXunFeng(bot) {
     
     console.log(list.length, newCommodity,kucunGengxin, 66666);
   
-    if ((newCommodity.length > 0) && !first) {
-        //  电话通知
-        try {
-
-          if (!calledFlag) {
-            calledFlag = true;
-            aiCallInit();
-          }
-
-        } catch (e) {
-          //   e
-        }
-    }
+   
     
     if (kucunGengxin.length > 0) {
     
@@ -73,14 +56,38 @@ export async function initXunFeng(bot) {
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
         str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n-------\n`
       })
+      
+      //  第一次不通知
+      if (first) {
+        first = false;
+        return;
+      }
     
-      if (currentStr !== str) {
+      if (
+          currentStr !== str
+      ) {
         try {
           currentStr = str;
           console.log('已发送钉钉消息');
           SendDingTalkMarkdown(str);
         } catch (e) {
           console.log(e);
+        }
+        
+        //  电话通知
+        if (
+            (newCommodity.length > 0)
+        ) {
+          try {
+      
+            if (!calledFlag) {
+              calledFlag = true;
+              aiCallInit();
+            }
+      
+          } catch (e) {
+            //   e
+          }
         }
       }
     
