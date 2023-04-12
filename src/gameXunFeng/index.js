@@ -3,7 +3,7 @@ import {getMtList} from './data/index.js';
 import {aliasWhiteList, botName, roomWhiteList, oldCommodityWhiteList} from '../../config.js'
 import {aiCallInit} from '../aiCall/index.js';
 import {wutouApi} from './data/wutou.js';
-import {SendDingTalk, SendDingTalkMarkdown} from '../sendDingTalk/index.js';
+import {SendDingTalkMarkdown} from '../sendDingTalk/index.js';
 
 
 
