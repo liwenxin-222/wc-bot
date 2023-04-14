@@ -42,7 +42,6 @@ export async function initXunFeng(bot) {
       }
       
       
-      
     });
     
     console.log(list.length, newCommodity,kucunGengxin, 66666);
@@ -71,25 +70,30 @@ export async function initXunFeng(bot) {
           }
           console.log('已发送钉钉消息');
           SendDingTalkMarkdown(str);
+  
+  
+          //  电话通知
+          if (
+              (newCommodity.length > 0)
+          ) {
+            try {
+      
+              if (!calledFlag) {
+        
+                calledFlag = true;
+                aiCallInit();
+              }
+      
+            } catch (e) {
+              //   e
+            }
+          }
+          
+          
         } catch (e) {
           console.log(e);
         }
         
-        //  电话通知
-        if (
-            (newCommodity.length > 0)
-        ) {
-          try {
-
-            if (!calledFlag) {
-              calledFlag = true;
-              aiCallInit();
-            }
-
-          } catch (e) {
-            //   e
-          }
-        }
       }
     
     }
