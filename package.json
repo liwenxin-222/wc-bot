@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node ./index.js",
-    "release": "pm2 start ./index.js"
+    "release": "pm2 start ./index.js --cron-restart='0 0 * * *'"
   },
   "author": "rongding",
   "license": "ISC",
