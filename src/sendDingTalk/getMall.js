@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
 import HttpsProxyAgent from 'https-proxy-agent';
-
+import {setSchedule} from '../gameXunFeng/schedule/index.js'
 let proxyIp = '140.250.92.246';
 let proxyPort = 19680;
 
@@ -165,7 +165,9 @@ async function queryGoodsList(x_xf_accept) {
     // data: params
   })
   
-  console.log(response.data.data.list, 4444)
+  // console.log(response.data.data.list, 4444);
+
+  return response.data.data.list;
   // print(response.json())
   // return response.json()
 }
@@ -173,12 +175,23 @@ async function queryGoodsList(x_xf_accept) {
 
 // get_data_bdms_faccdee21b68()
 const token_ = get_token();
-const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
-// console.log(data_bdms_faccdee21b68, '结果这里')
-const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
-const x_xf_accept = await get_x_xf_accept(coded_v20);
+
+export function getMall(fn) {
+  setSchedule('0/20 * * * * ?', async () => {
+    const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
+    console.log(data_bdms_faccdee21b68, '结果这里')
+
+    const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
+    const x_xf_accept = await get_x_xf_accept(coded_v20);
 
 // console.log(x_xf_accept, 555)
 
-queryGoodsList(x_xf_accept.data.t);
+    const list = await queryGoodsList(x_xf_accept.data.t);
+    console.log(list);
+    fn(list);
+  })
+
+}
+
+
 

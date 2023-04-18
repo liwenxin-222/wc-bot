@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "node ./index.js",
-    "release": "pm2 start ./index.js --cron-restart='0 0 * * *'"
+    "release": "pm2 start ./index.js --cron-restart='0 0 * * *'",
+    "relding": "pm2 src/getMall.js --cron-restart='0 0 * * *'"
   },
   "author": "rongding",
   "license": "ISC",
