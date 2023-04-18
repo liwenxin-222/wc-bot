@@ -3,7 +3,7 @@ import {getMtList} from './data/index.js';
 import {aliasWhiteList, botName, roomWhiteList, oldCommodityWhiteList} from '../../config.js'
 import {aiCallInit} from '../aiCall/index.js';
 import {wutouApi} from './data/wutou.js';
-import {SendDingTalkMarkdown} from '../sendDingTalk/index.js';
+import {SendDingTalkMarkdown, SendDingTalkTest} from '../sendDingTalk/index.js';
 
 
 
@@ -12,6 +12,8 @@ export async function initXunFeng(bot) {
   let currentStr = '';
   let first = true;
   
+  let testLog = [];
+  
   console.log(`定时任务已启动`, `今天电话通知：${calledFlag ? '已通知' : '未通知'}`);
   
   // 每天凌晨更新电话flag
@@ -19,10 +21,21 @@ export async function initXunFeng(bot) {
     calledFlag = false;
   });
   
+  // setSchedule('0 0 * * * ?', async () => {
+  //   let str = '### 集市当前货品追踪！！！！！！！！\n ';
+  //   testLog.forEach((item) => {
+  //     const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
+  //     str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n-------\n`
+  //   })
+  //   SendDingTalkTest(str);
+  // });
+  //
   
   wutouApi(function (list) {
     let newCommodity = [];
     let kucunGengxin = [];
+    
+    testLog = list;
     
     list.forEach((itemCommodity) => {
       
@@ -55,6 +68,7 @@ export async function initXunFeng(bot) {
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
         str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n-------\n`
       })
+      SendDingTalkTest(str);
       
       if (
           currentStr !== str
@@ -69,26 +83,26 @@ export async function initXunFeng(bot) {
             return;
           }
           console.log('已发送钉钉消息');
-          SendDingTalkMarkdown(str);
+          // SendDingTalkMarkdown(str);
   
   
           //  电话通知
-          if (
-              (newCommodity.length > 0)
-          ) {
-            try {
-      
-              if (!calledFlag) {
-        
-                calledFlag = true;
-                aiCallInit();
-              }
-      
-            } catch (e) {
-              //   e
-            }
-          }
-          
+          // if (
+          //     (newCommodity.length > 0)
+          // ) {
+          //   try {
+          //
+          //     if (!calledFlag) {
+          //
+          //       calledFlag = true;
+          //       aiCallInit();
+          //     }
+          //
+          //   } catch (e) {
+          //     //   e
+          //   }
+          // }
+          //
           
         } catch (e) {
           console.log(e);

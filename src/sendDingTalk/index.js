@@ -52,3 +52,12 @@ export const SendDingTalkMarkdown = (text, {isAtAll = false} = {}) => {
   
   robotXunF.text(text)
 }
+
+export const SendDingTalkTest = (text) => {
+  
+  const robotXunTest = new ChatBot({
+    webhook: 'https://oapi.dingtalk.com/robot/send?access_token=196cf577658f5dc1cd8d69bbeb802a99f22008f6ecf4f845578ca06ab7dc2818'
+  });
+  
+  robotXunTest.text(text);
+}
