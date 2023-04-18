@@ -160,8 +160,8 @@ async function queryGoodsList(x_xf_accept) {
     url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=1&size=40',
     method: 'GET',
     headers,
-    httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     // data: params
   })
   
