@@ -66,7 +66,7 @@ export async function initXunFeng(bot) {
       let str = '### 集市上新品了！！！！！！！！\n ';
       kucunGengxin.forEach((item) => {
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-        str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n-------\n`
+        str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n > 比例：${item.inventory} \n-------\n`
       })
       SendDingTalkTest(str);
       

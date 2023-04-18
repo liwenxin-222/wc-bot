@@ -8,7 +8,7 @@ export async function wutouApi(callback) {
   const page = await browser.newPage()
   
   // 3. 输入地址敲回车
-  await page.goto('http://liwenx.com:888/')
+  await page.goto('https://mall-h5.haowu.store')
   
   page.on('requestfinished', request => {
     
