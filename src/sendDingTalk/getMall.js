@@ -1,6 +1,12 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
+import HttpsProxyAgent from 'https-proxy-agent';
 
+let proxyIp = '140.250.92.246';
+let proxyPort = 19680;
+
+let username = 'liwenxinbz';
+let password = '3la8rid3';
 
 async function get_data_bdms_faccdee21b68() {
   const headers = {
@@ -74,7 +80,7 @@ function get_coded_v20(x) {
     c += n;
     d += 1;
   }
-  
+  console.log('get_coded_v20', c);
   return "CODED--v20" + c;
 }
 
@@ -110,6 +116,8 @@ async function get_x_xf_accept(coded_v20) {
   const response = await axios({
     url: 'https://sofire.baidu.com/abot/api/v1/tpl/commit',
     method: 'POST',
+    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     headers: {
       ...headers,
       ...cookies,
@@ -152,6 +160,8 @@ async function queryGoodsList(x_xf_accept) {
     url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=1&size=40',
     method: 'GET',
     headers,
+    httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     // data: params
   })
   
