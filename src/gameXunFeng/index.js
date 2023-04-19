@@ -40,7 +40,7 @@ export async function initXunFeng() {
     SendDingTalkTest(str);
   });
   
-  setSchedule('0/20 * * * * ?', async () => {
+  setSchedule('30 * * * * *', async () => {
     let newCommodity = [];
     let kucunGengxin = [];
     const list = await getMall();
