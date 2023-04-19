@@ -2,11 +2,12 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import HttpsProxyAgent from 'https-proxy-agent';
 import {setSchedule} from '../gameXunFeng/schedule/index.js'
-let proxyIp = '140.250.92.246';
-let proxyPort = 19680;
 
-let username = 'liwenxinbz';
-let password = '3la8rid3';
+let proxyIp = '123.181.235.56';
+let proxyPort = 30001;
+
+let username = '202304191869039034';
+let password = 'FVcl18rl';
 
 async function get_data_bdms_faccdee21b68() {
   const headers = {
@@ -176,8 +177,8 @@ async function queryGoodsList(x_xf_accept) {
 // get_data_bdms_faccdee21b68()
 const token_ = get_token();
 
-export function getMall(fn) {
-  setSchedule('0/20 * * * * ?', async () => {
+export async function getMall(fn) {
+  // setSchedule('0/20 * * * * ?', async () => {
     const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
     console.log(data_bdms_faccdee21b68, '结果这里')
 
@@ -187,9 +188,11 @@ export function getMall(fn) {
 // console.log(x_xf_accept, 555)
 
     const list = await queryGoodsList(x_xf_accept.data.t);
+    
     console.log(list);
-    fn(list);
-  })
+    return list;
+    // fn(list);
+  // })
 
 }
 
