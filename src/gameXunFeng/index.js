@@ -94,7 +94,7 @@ export async function initXunFeng() {
             return;
           }
           console.log('已发送钉钉消息');
-          SendDingTalkMarkdown(str);
+          // SendDingTalkMarkdown(str);
           
           
           //  电话通知
