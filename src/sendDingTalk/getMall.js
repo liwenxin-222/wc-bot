@@ -1,13 +1,16 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
 import HttpsProxyAgent from 'https-proxy-agent';
-import {setSchedule} from '../gameXunFeng/schedule/index.js'
+import {setSchedule} from '../gameXunFeng/schedule/index.js';
+import {proxyW} from './getProxy.js';
 
 let proxyIp = '123.181.235.56';
 let proxyPort = 30001;
 
 let username = '202304191869039034';
 let password = 'FVcl18rl';
+
+
 
 async function get_data_bdms_faccdee21b68() {
   const headers = {
@@ -85,7 +88,7 @@ function get_coded_v20(x) {
   return "CODED--v20" + c;
 }
 
-async function get_x_xf_accept(coded_v20) {
+async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
   const cookies = {
 // # 'BAIDUID_BFESS': 'A2FF4A80869FFABDD818270868A78818:FG=1',
 // # 'ZFY': 'GLNdf6FCQoG84p0SASf:A1FNy1VvkTpiXrp2dDzPeI:Bo:C',
@@ -118,7 +121,9 @@ async function get_x_xf_accept(coded_v20) {
     url: 'https://sofire.baidu.com/abot/api/v1/tpl/commit',
     method: 'POST',
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     headers: {
       ...headers,
       ...cookies,
@@ -130,7 +135,7 @@ async function get_x_xf_accept(coded_v20) {
   return response.data;
 }
 
-async function queryGoodsList(x_xf_accept) {
+async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
   const headers = {
     'authority': 'mall-api.haowu.store',
     'accept': '*/*',
@@ -162,7 +167,9 @@ async function queryGoodsList(x_xf_accept) {
     method: 'GET',
     headers,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     // data: params
   })
   
@@ -178,23 +185,19 @@ async function queryGoodsList(x_xf_accept) {
 const token_ = get_token();
 
 export async function getMall(fn) {
-  // setSchedule('0/20 * * * * ?', async () => {
     const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
-    console.log(data_bdms_faccdee21b68, '结果这里')
 
     const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
-    const x_xf_accept = await get_x_xf_accept(coded_v20);
+    const proxyRes = await proxyW();
+    const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
 
-// console.log(x_xf_accept, 555)
 
-    const list = await queryGoodsList(x_xf_accept.data.t);
+    const list = await queryGoodsList(x_xf_accept.data.t, proxyRes);
     
     console.log(list);
     return list;
-    // fn(list);
-  // })
 
 }
-getMall()
+// getMall()
 
 
