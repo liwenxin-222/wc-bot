@@ -11,7 +11,6 @@ let username = '202304191869039034';
 let password = 'FVcl18rl';
 
 
-
 async function get_data_bdms_faccdee21b68() {
   const headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -31,10 +30,10 @@ async function get_data_bdms_faccdee21b68() {
   }
   
   const response = await axios.get('https://mall-h5.haowu.store/', headers);
-  console.log(response.data)
+  // console.log(response.data)
   const $ = cheerio.load(response.data);
   const data_bdms_faccdee21b68 = $('script[data-bdms-faccdee21b68]').attr('data-bdms-faccdee21b68');
-  console.log(data_bdms_faccdee21b68, 111);
+  // console.log(data_bdms_faccdee21b68, 111);
   return data_bdms_faccdee21b68
 }
 
@@ -58,7 +57,7 @@ async function get_token() {
   //     11) + f'{round(time.time() * 1000)}' + get_random_num(4)
 // # print(token_)
   const token = `${cc}${xx}f${Math.round(Date.now())}${get_random_num(11)}f${Math.round(Date.now())}${get_random_num(4)}`;
-  console.log(token, 2222)
+  // console.log(token, 2222)
   return token
 }
 
@@ -84,7 +83,7 @@ function get_coded_v20(x) {
     c += n;
     d += 1;
   }
-  console.log('get_coded_v20', c);
+  // console.log('get_coded_v20', c);
   return "CODED--v20" + c;
 }
 
@@ -131,7 +130,7 @@ async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
     data: data,
   });
   
-  console.log(response.data, 3333);
+  // console.log(response.data, 3333);
   return response.data;
 }
 
@@ -174,10 +173,48 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
   })
   
   // console.log(response.data.data.list, 4444);
-
+  
   return response.data.data.list;
   // print(response.json())
   // return response.json()
+}
+
+async function getDetail(x_xf_accept, [proxyIp, proxyPort], params) {
+  const headers = {
+    'authority': 'mall-api.haowu.store',
+    'accept': '*/*',
+    'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+    'authorization': '',
+    'cache-control': 'no-cache',
+    'content-type': 'application/json;',
+    'origin': 'https://mall-h5.haowu.store',
+    'pragma': 'no-cache',
+    'referer': 'https://mall-h5.haowu.store/',
+    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-site',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
+    // # 'x-xf-accept': 'zvlUT7E64m9Wg/SuIA4L+Qca41SK9O0pZuA3TndmIPP/9Siq4OQN5QFmPXt63s5vpBLLvoX7hOJWZDwDMpJB1anPBdlPuyXKXptmNzRfZwz4dP8u4J6NkM7MiXP41k3BKCgn7Y1qwC8rUwZWheL7P38WrjJDPE//3+rl1EJCJ4iOKAy90a5PRUqqc3BX6INet0wLRsB8jtzrBCTeykpQLdtSJNi5PxpEQf5oObDetsczw5raNDC03TToMC38db+0HixPO8RyerWB9Q9n3P7kX7pbiV/97zUoCyiUFqyZVzY9b2/iUMRQqnqb/Fb3dV0KXSSuFT/FBlyX3Sf1Tx0+fSbIkc8jTeII/Ftw+B+vfkC1U1OxLzFjvGYv8Z0/Nvsl3mtj09vQg8s8XngWCLtJroaY1XD4aPHmt1/RpJYkoqJtVM75wSGmS3UMCky9mMWOG9GMETpDe5op+MyeE2lObw==|uevtUHVbAlr9y513qUY06ddlY3QUMtMDmwLNfM5MBgQ=|10|eb582c0b654a91b72c85f19234c24fa5',
+    'x-xf-accept': x_xf_accept
+  }
+  const response = await axios({
+    url: 'https://mall-api.haowu.store/goods/queryGoodsDetail',
+    method: 'POST',
+    headers,
+    data: params,
+    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    // data: params
+  })
+  
+  // console.log(response.data.data.list, 4444);
+  
+  return response.data.data;
 }
 
 
@@ -185,19 +222,34 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
 const token_ = get_token();
 
 export async function getMall(fn) {
-    const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
-
-    const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
-    const proxyRes = await proxyW();
-    const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
-
-
-    const list = await queryGoodsList(x_xf_accept.data.t, proxyRes);
-    
-    console.log(list);
-    return list;
-
+  const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
+  
+  const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
+  const proxyRes = await proxyW();
+  const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
+  
+  
+  const list = await queryGoodsList(x_xf_accept.data.t, proxyRes);
+  
+  const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
+  const detail392 = await getDetail(x_xf_accept1.data.t, proxyRes, {
+    skuId: 392,
+    spuId: "279"
+  })
+  // list.forEach(async (item) => {
+  //   if (item.multiSkuStatus) {
+  //     const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
+  //     const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
+  //   }
+  // })
+  
+  // console.log(detail392);
+  detail392.id = detail392.id + '-' + detail392.skuId;
+  list.push(detail392);
+  return list;
+  
 }
+
 // getMall()
 
 
