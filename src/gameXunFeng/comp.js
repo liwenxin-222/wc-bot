@@ -117,7 +117,7 @@ export function kucunChange (list) {
     })
     console.log(str);
     LOG.info(str);
-    SendDingTalkTest(str);
+    SendDingTalkMarkdown(str);
   }
   currentSourceMap = Object.assign({}, newSourceMap);
   
