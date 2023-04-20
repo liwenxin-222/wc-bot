@@ -104,7 +104,7 @@ export function kucunChange (list) {
   Object.keys(newSourceMap).forEach((key) => {
     if (currentSourceMap[key] !== newSourceMap[key]) {
       const h = list.find((its) => {
-        return its.id == key;
+        return (its.id == key && its.inventory > 3);
       })
       h && validList.push(h);
     }
