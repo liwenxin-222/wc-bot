@@ -49,7 +49,7 @@ export function xinping(list) {
     if (validList.length > 0) {
       let str = '### 集市上新品\n ';
       validList.forEach((item) => {
-        const sloganIndex = item.sloganMap[1].match(/1:[0-9]+/);
+        const sloganIndex = item.sloganMap[1].match(/[0-9]:[0-9]+/);
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
         str += ` - 名称：${item.name} \n - 价格：${price} \n - 库存：<font color="red">${item.inventory}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
       })
@@ -71,7 +71,7 @@ export function xinping(list) {
     });
     let str = '### 集市下架了新上的商品 ';
     validList.forEach((item) => {
-      const sloganIndex = item.sloganMap[1].match(/1:[0-9]+/);
+      const sloganIndex = item.sloganMap[1].match(/[0-9]:[0-9]+/);
       const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
       str += ` - 名称：${item.name} \n - 价格：${price} \n - 库存：<font color="red">${item.inventory}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
     })
@@ -121,7 +121,7 @@ export function kucunChange (list) {
       return oneAdnOneItem.sloganMap[1].includes('1:');
     })
     validList.forEach((item) => {
-      const sloganIndex = item.sloganMap[1].match(/1:[0-9]+/);
+      const sloganIndex = item.sloganMap[1].match(/[0-9]:[0-9]+/);
       const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
       str += ` - 名称：${item.name} \n - 价格：${price} \n - 库存：<font color="red">${item.inventory}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
     })
