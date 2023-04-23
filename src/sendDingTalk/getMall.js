@@ -161,8 +161,19 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
   //   'size': '40',
   // }
   
-  const response = await axios({
-    url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=1&size=40',
+  const response1 = await axios({
+    url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=1&size=20',
+    method: 'GET',
+    headers,
+    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    // data: params
+  })
+  
+  const response2 = await axios({
+    url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=2&size=20',
     method: 'GET',
     headers,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
@@ -174,7 +185,7 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
   
   // console.log(response.data.data.list, 4444);
   
-  return response.data.data.list;
+  return [...response1.data.data.list, ...response2.data.data.list];
   // print(response.json())
   // return response.json()
 }
