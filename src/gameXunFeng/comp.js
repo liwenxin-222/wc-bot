@@ -29,7 +29,7 @@ export function xinping(list) {
   
   console.log(currentItemIds, newItemIds, 112)
   
-  if (currentItemIds.join() === newItemIds.join()) {
+  if (currentItemIds.length === newItemIds.length) {
     console.log('新品通知，前后两次一样，不提醒')
     return;
   }
@@ -49,15 +49,17 @@ export function xinping(list) {
     if (validList.length > 0) {
       let str = '### 集市上新品\n ';
       validList.forEach((item) => {
+        const sloganIndex = item.sloganMap[1].match(/1:[0-9]+/);
         const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-        str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n > 比例：${item.sloganMap[1]} \n-------\n`
+        str += ` - 名称：${item.name} \n - 价格：${price} \n - 库存：<font color="red">${item.inventory}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
       })
       console.log(str);
       LOG.info(str);
       SendDingTalkMarkdown(str);
+      // SendDingTalkTest(str)
     }
   
-  } else {
+  } else if (newItemIds.length < currentItemIds.length) {
     currentItemIds.forEach((item) => {
       if (!newItemIds.includes(item)) {
         validList.push(
@@ -68,13 +70,16 @@ export function xinping(list) {
       }
     });
     let str = '### 集市下架了新上的商品 ';
-    // validList.forEach((item) => {
-    //   const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-    //   str += `> 名称：${item.name} \n > 价格：${price} \n > 比例：${item.sloganMap[1]} \n-------\n`
-    // })
-    // console.log(str);
+    validList.forEach((item) => {
+      const sloganIndex = item.sloganMap[1].match(/1:[0-9]+/);
+      const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
+      str += ` - 名称：${item.name} \n - 价格：${price} \n - 库存：<font color="red">${item.inventory}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
+    })
+    console.log(str);
+    LOG.info(str);
   
     SendDingTalkMarkdown(str);
+    // SendDingTalkTest(str)
   }
   
   currentItemIds = newItemIds;
@@ -111,13 +116,19 @@ export function kucunChange (list) {
   })
   if (validList.length > 0) {
     let str = '### 集市库存更新 \n ';
+    
+    const isAtAll = validList.find((oneAdnOneItem) => {
+      return oneAdnOneItem.sloganMap[1].includes('1:');
+    })
     validList.forEach((item) => {
+      const sloganIndex = item.sloganMap[1].match(/1:[0-9]+/);
       const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-      str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n > 比例：${item.sloganMap[1]} \n-------\n`
+      str += ` - 名称：${item.name} \n - 价格：${price} \n - 库存：<font color="red">${item.inventory}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
     })
     console.log(str);
     LOG.info(str);
-    SendDingTalkMarkdown(str);
+    SendDingTalkMarkdown(str, {isAtAll: !!isAtAll});
+    // SendDingTalkTest(str, {isAtAll: !!isAtAll});
   }
   currentSourceMap = Object.assign({}, newSourceMap);
   

@@ -41,7 +41,7 @@ export const SendDingTalkMarkdown = (text, {isAtAll = false} = {}) => {
   });
 // 发送钉钉消息
   robot.markdown('商城上新通知', text, {
-
+    "isAtAll": isAtAll
   })
   .then((res) => {
     // TODO
@@ -50,14 +50,18 @@ export const SendDingTalkMarkdown = (text, {isAtAll = false} = {}) => {
     console.log('通知失败')
   });
   
-  robotXunF.text(text)
+  robotXunF.markdown('商城上新通知', text, {
+    "isAtAll": isAtAll
+  })
 }
 
-export const SendDingTalkTest = (text) => {
+export const SendDingTalkTest = (text, {isAtAll = false} = {}) => {
   
   const robotXunTest = new ChatBot({
     webhook: 'https://oapi.dingtalk.com/robot/send?access_token=196cf577658f5dc1cd8d69bbeb802a99f22008f6ecf4f845578ca06ab7dc2818'
   });
   
-  robotXunTest.text(text);
+  robotXunTest.markdown('商城上新通知', text, {
+    "isAtAll": isAtAll
+  });
 }

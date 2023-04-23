@@ -36,8 +36,9 @@ export async function initXunFeng() {
     const list = await getMall();
     
     // if (Math.ceil(Math.random()) * 10 > 5) {
-    //   // list.push({"id":1985,"code":"M100198","name":"53%vol 100ml 贵州茅台酒二十四节气之立春","minPrice":569.000000000000000000,"maxPrice":569.000000000000000000,"inventory":0,"listUrl":"https://mall-res.haowu.store/prod/20230317/goods/4faae43e60074086a6ea8f0ccf5eeed1.jpeg","slogan":"","multiSkuStatus":false,"sloganMap":{"1":"请点击背包内“立春·美自天成”数字藏品“行权”按钮进行购买"},"originPrice":569.000000000000000000,"shopDisplayInfo":null})
+    //   list.push({"id":1985,"code":"M100198","name":"53%vol 100ml 贵州茅台酒二十四节气之立春","minPrice":569.000000000000000000,"maxPrice":569.000000000000000000,"inventory":0,"listUrl":"https://mall-res.haowu.store/prod/20230317/goods/4faae43e60074086a6ea8f0ccf5eeed1.jpeg","slogan":"","multiSkuStatus":false,"sloganMap":{"1":"请点击背包内“立春·美自天成”数字1:1藏品“行权”按钮进行购买"},"originPrice":569.000000000000000000,"shopDisplayInfo":null})
     //   list[2].inventory = Math.ceil(Math.random() * 10);
+    //   list[2].sloganMap = {"1":"请点击背包内“立春·美自天成”数字1:1藏品“行权”按钮进行购买"}
     //   console.log(list[0], Math.ceil(Math.random() * 10))
     //
     // }
