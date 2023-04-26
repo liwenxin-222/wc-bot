@@ -162,7 +162,7 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
   // }
   
   const response1 = await axios({
-    url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=1&size=20',
+    url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=1&size=30',
     method: 'GET',
     headers,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
@@ -173,7 +173,7 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
   })
   
   const response2 = await axios({
-    url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=2&size=20',
+    url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=2&size=30',
     method: 'GET',
     headers,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
