@@ -50,8 +50,8 @@ export function xinping(list) {
       let str = '### 集市上新品\n ';
       validList.forEach((item) => {
         const sloganIndex = item.sloganMap[1].match(/[0-9]:[0-9]+/);
-        const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-        str += ` - 名称：${item.name} \n - 价格：${price} \n - 库存：<font color="red">${item.inventory}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
+        // const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
+        str += ` - 名称：${item.name} \n - 价格：${item.minPrice} \n - 库存：<font color="red">${item.inventory || (item.hasInv ? '可购买' : '无')}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
       })
       console.log(str);
       LOG.info(str);
@@ -72,8 +72,8 @@ export function xinping(list) {
     let str = '### 集市下架了新上的商品 ';
     validList.forEach((item) => {
       const sloganIndex = item.sloganMap[1].match(/[0-9]:[0-9]+/);
-      const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-      str += ` - 名称：${item.name} \n - 价格：${price} \n - 库存：<font color="red">${item.inventory}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
+      // const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
+      str += ` - 名称：${item.name} \n - 价格：${item.minPrice} \n - 库存：<font color="red">${item.inventory || (item.hasInv ? '可购买' : '无')}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
     })
     console.log(str);
     LOG.info(str);
@@ -93,7 +93,7 @@ export function kucunChange (list) {
   
   const newSourceMap = {};
   list.forEach((item) => {
-    newSourceMap[item.id] = item.inventory;
+    newSourceMap[item.id] = item.inventory || item.hasInv;
   });
   
   if (!currentSourceMap) {
@@ -107,9 +107,9 @@ export function kucunChange (list) {
     return;
   }
   Object.keys(newSourceMap).forEach((key) => {
-    if (currentSourceMap[key] !== newSourceMap[key]) {
+    if (newSourceMap[key] && !currentSourceMap[key]) {
       const h = list.find((its) => {
-        return (its.id == key && its.inventory > 3);
+        return (its.id == key);
       })
       h && validList.push(h);
     }
@@ -122,8 +122,8 @@ export function kucunChange (list) {
     })
     validList.forEach((item) => {
       const sloganIndex = item.sloganMap[1].match(/[0-9]:[0-9]+/);
-      const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-      str += ` - 名称：${item.name} \n - 价格：${price} \n - 库存：<font color="red">${item.inventory}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
+      // const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
+      str += ` - 名称：${item.name} \n - 价格：${item.minPrice} \n - 库存：<font color="red">${item.inventory || (item.hasInv ? '可购买' : '无')}</font>   \n - 比例：<font color="blue">${sloganIndex[0]}</font> \n-------\n`
     })
     console.log(str);
     LOG.info(str);

@@ -30,16 +30,20 @@ export async function initXunFeng() {
     SendDingTalkTest(str);
   });
   
-  setSchedule('0 */1 * * * ?', async () => {
+  setSchedule('0/30 * * * * ?', async () => {
     let newCommodity = [];
     let kucunGengxin = [];
     const list = await getMall();
-    
-    // if (Math.ceil(Math.random()) * 10 > 5) {
-    //   list.push({"id":1985,"code":"M100198","name":"53%vol 100ml 贵州茅台酒二十四节气之立春","minPrice":569.000000000000000000,"maxPrice":569.000000000000000000,"inventory":0,"listUrl":"https://mall-res.haowu.store/prod/20230317/goods/4faae43e60074086a6ea8f0ccf5eeed1.jpeg","slogan":"","multiSkuStatus":false,"sloganMap":{"1":"请点击背包内“立春·美自天成”数字1:1藏品“行权”按钮进行购买"},"originPrice":569.000000000000000000,"shopDisplayInfo":null})
-    //   list[2].inventory = Math.ceil(Math.random() * 10);
-    //   list[2].sloganMap = {"1":"请点击背包内“立春·美自天成”数字1:1藏品“行权”按钮进行购买"}
-    //   console.log(list[0], Math.ceil(Math.random() * 10))
+    // const n = Math.ceil(Math.random() * 10);
+    // console.log(n, '随机数')
+    // if (n > 5) {
+    //   list.push({"id":390,"name":"月亮时光马克杯系列（内含6种规格）","minPrice":238.000000000000000000,"listUrl":"https://mall-res.haowu.store/prod/20230410/goods/bdbf9a66c84f4dc59c077ca9338f3a24.jpeg","multiSkuStatus":true,"sloganMap":{"1":"确认收货后按照实付金额2:1返元贝"},"originPrice":298.000000000000000000,"shopDisplayInfo":null,"hasInv":false,"inventory": 10})
+    //   // list[2].inventory = Math.ceil(Math.random() * 10);
+    //   // list[2].sloganMap = {"1":"请点击背包内“立春·美自天成”数字1:1藏品“行权”按钮进行购买"}
+    //   // console.log(list[0], Math.ceil(Math.random() * 10))
+    //
+    // } else {
+    //   list.push({"id":390,"name":"月亮时光马克杯系列（内含6种规格）","minPrice":238.000000000000000000,"listUrl":"https://mall-res.haowu.store/prod/20230410/goods/bdbf9a66c84f4dc59c077ca9338f3a24.jpeg","multiSkuStatus":true,"sloganMap":{"1":"确认收货后按照实付金额2:1返元贝"},"originPrice":298.000000000000000000,"shopDisplayInfo":null,"hasInv":false,"inventory": 0})
     //
     // }
     // console.log(list, 333)

@@ -10,7 +10,28 @@ let proxyPort = 30001;
 let username = '202304191869039034';
 let password = 'FVcl18rl';
 
-
+// const impossibleCommodity = [{
+//   params: {"spuId":"60"},
+//   name: '小茅七曜徽章套组'
+// }, {
+//   params: {"spuId":"60"},
+//   name: '小茅七曜徽章套组'
+// }, {
+//   params: {"spuId":"60"},
+//   name: '小茅七曜徽章套组'
+// }, {
+//   params: {"spuId":"60"},
+//   name: '小茅七曜徽章套组'
+// }, {
+//   params: {"spuId":"60"},
+//   name: '小茅七曜徽章套组'
+// }, {
+//   params: {"spuId":"60"},
+//   name: '小茅七曜徽章套组'
+// }, {
+//   params: {"spuId":"60"},
+//   name: '小茅七曜徽章套组'
+// }]
 async function get_data_bdms_faccdee21b68() {
   const headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -162,30 +183,60 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
   // }
   
   const response1 = await axios({
-    url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=1&size=30',
-    method: 'GET',
+    url: 'https://mall-api.haowu.store/goods/queryGoodsListByDisplayResource',
+    method: 'POST',
     headers,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // data: params
+    data: JSON.stringify({
+      orderBy:"SORT_DESC",
+      page:1,
+      resourceId:6,
+      size:30
+    })
   })
   
   const response2 = await axios({
-    url: 'https://mall-api.haowu.store/goods/queryGoodsList?page=2&size=30',
-    method: 'GET',
+    url: 'https://mall-api.haowu.store/goods/queryGoodsListByDisplayResource',
+    method: 'post',
     headers,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // data: params
+    data: JSON.stringify({
+      orderBy:"SORT_DESC",
+      page:1,
+      resourceId:7,
+      size:30
+    })
+  })
+  
+  const response3 = await axios({
+    url: 'https://mall-api.haowu.store/goods/queryGoodsListByDisplayResource',
+    method: 'post',
+    headers,
+    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    data: JSON.stringify({
+      orderBy:"SORT_DESC",
+      page:1,
+      resourceId:5,
+      size:30
+    })
   })
   
   // console.log(response.data.data.list, 4444);
   
-  return [...response1.data.data.list, ...response2.data.data.list];
+  return [
+      ...response1.data.data.list,
+      ...response2.data.data.list,
+      ...response3.data.data.list,
+  ];
   // print(response.json())
   // return response.json()
 }
@@ -257,6 +308,7 @@ export async function getMall(fn) {
   // console.log(detail392);
   detail392.id = detail392.id + '-' + detail392.skuId;
   list.push(detail392);
+  console.log(list)
   return list;
   
 }
