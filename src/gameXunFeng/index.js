@@ -6,7 +6,15 @@ import {aiCallInit} from '../aiCall/index.js';
 import {getMall} from '../sendDingTalk/getMall.js';
 import {xinping, kucunChange} from './comp.js';
 import {SendDingTalkMarkdown, SendDingTalkTest} from '../sendDingTalk/index.js';
-
+function meDing(testLog) {
+  let str = '### 集市当前货品追踪！！！！！！！！\n ';
+  testLog.forEach((item) => {
+    const sloganIndex = item.sloganMap[1].match(/[0-9]:[0-9]+/);
+    // const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
+    str += ` - 名称：${item.name} \n - 价格：${item.minPrice} \n - 库存：<font color="red">${item.inventory || (item.hasInv ? '可购买' : '无')}</font>   \n - 比例：<font color="blue">${sloganIndex && sloganIndex[0]}</font> \n-------\n`
+  })
+  SendDingTalkTest(str);
+}
 export async function initXunFeng() {
   let calledFlag = false;
   let currentStr = '';
@@ -22,15 +30,10 @@ export async function initXunFeng() {
   });
   
   setSchedule('0 0 * * * ?', async () => {
-    let str = '### 集市当前货品追踪！！！！！！！！\n ';
-    testLog.forEach((item) => {
-      const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-      str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n-------\n`
-    })
-    SendDingTalkTest(str);
+    meDing(testLog);
   });
   
-  setSchedule('0/30 * * * * ?', async () => {
+  setSchedule('0 */1 * * * ?', async () => {
     let newCommodity = [];
     let kucunGengxin = [];
     const list = await getMall();
@@ -48,7 +51,8 @@ export async function initXunFeng() {
     // }
     // console.log(list, 333)
     testLog = list;
-    
+  
+    meDing(testLog);
     
     xinping(list);
     kucunChange(list);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
 import HttpsProxyAgent from 'https-proxy-agent';
-import {setSchedule} from '../gameXunFeng/schedule/index.js';
+//import {setSchedule} from '../gameXunFeng/schedule/index.js';
 import {proxyW} from './getProxy.js';
 
 let proxyIp = '123.181.235.56';
@@ -34,27 +34,27 @@ let password = 'FVcl18rl';
 // }]
 async function get_data_bdms_faccdee21b68() {
   const headers = {
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
-    'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive',
-    'Pragma': 'no-cache',
-    'Sec-Fetch-Dest': 'document',
-    'Sec-Fetch-Mode': 'navigate',
-    'Sec-Fetch-Site': 'same-origin',
-    'Sec-Fetch-User': '?1',
-    'Upgrade-Insecure-Requests': '1',
+//    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+//    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+//    'Cache-Control': 'no-cache',
+//    'Connection': 'keep-alive',
+//    'Pragma': 'no-cache',
+//    'Sec-Fetch-Dest': 'document',
+//    'Sec-Fetch-Mode': 'navigate',
+//    'Sec-Fetch-Site': 'same-origin',
+//    'Sec-Fetch-User': '?1',
+//    'Upgrade-Insecure-Requests': '1',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
-    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"Windows"',
+//    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+//    'sec-ch-ua-mobile': '?0',
+//    'sec-ch-ua-platform': '"Windows"',
   }
   
-  const response = await axios.get('https://mall-h5.haowu.store/', headers);
+  const response = await axios.get('https://mall-h5.xwindlab.com/', headers);
   // console.log(response.data)
   const $ = cheerio.load(response.data);
   const data_bdms_faccdee21b68 = $('script[data-bdms-faccdee21b68]').attr('data-bdms-faccdee21b68');
-  // console.log(data_bdms_faccdee21b68, 111);
+  console.log(data_bdms_faccdee21b68, 111);
   return data_bdms_faccdee21b68
 }
 
@@ -116,22 +116,22 @@ async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
   }
   
   const headers = {
-    'authority': 'sofire.baidu.com',
-    'accept': '*/*',
-    'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
-    'cache-control': 'no-cache',
-    'content-type': 'text/plain',
+//    'authority': 'sofire.baidu.com',
+//    'accept': '*/*',
+//    'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+//    'cache-control': 'no-cache',
+//    'content-type': 'text/plain',
 // # Requests sorts cookies= alphabetically
 // # 'cookie': 'BAIDUID_BFESS=A2FF4A80869FFABDD818270868A78818:FG=1; ZFY=GLNdf6FCQoG84p0SASf:A1FNy1VvkTpiXrp2dDzPeI:Bo:C; ab_sr=1.0.1_ODJiZDlhMDIwYmVmMGNiNjk3ZGE1NGFjODNlYTA5Y2M5MzQxM2EyMWU0ZmRjN2Q0MzlhYzVlMTcyYTM3YzI4NGU1OTc3YWYxMGNmNzBhMDUwZDIyYzZkZTI5MjFlMmI3MGZiNDg2NzdlZWVhZTFmMzJlNGNjODc2MjAyMGUwY2E4OWNmNWNlMTI0NDBmMGNhYmQxOWIxOTZiNTM5NDE3Zg==',
-    'origin': 'https://mall-h5.haowu.store',
-    'pragma': 'no-cache',
-    'referer': 'https://mall-h5.haowu.store/',
-    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"Windows"',
-    'sec-fetch-dest': 'empty',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-site': 'cross-site',
+//    'origin': 'https://mall-h5.xwindlab.com',
+//    'pragma': 'no-cache',
+//    'referer': 'https://mall-h5.xwindlab.com/',
+//    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+//    'sec-ch-ua-mobile': '?0',
+//    'sec-ch-ua-platform': '"Windows"',
+//    'sec-fetch-dest': 'empty',
+//    'sec-fetch-mode': 'cors',
+//    'sec-fetch-site': 'cross-site',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
   }
   
@@ -155,17 +155,18 @@ async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
   return response.data;
 }
 
-async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
+async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
+  console.log(x_xf_accept, 'token')
   const headers = {
-    'authority': 'mall-api.haowu.store',
+    'authority': 'mall-api.xwindlab.com',
     'accept': '*/*',
-    'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
-    'authorization': '',
+    'accept-language': 'zh-CN,zh-Hans;q=0.9',
+    'authorization': token,
     'cache-control': 'no-cache',
     'content-type': 'application/json;',
-    'origin': 'https://mall-h5.haowu.store',
+    'origin': 'https://mall-h5.xwindlab.com',
     'pragma': 'no-cache',
-    'referer': 'https://mall-h5.haowu.store/',
+    'referer': 'https://mall-h5.xwindlab.com/',
     'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
@@ -173,7 +174,6 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
     'sec-fetch-mode': 'cors',
     'sec-fetch-site': 'same-site',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
-// # 'x-xf-accept': 'zvlUT7E64m9Wg/SuIA4L+Qca41SK9O0pZuA3TndmIPP/9Siq4OQN5QFmPXt63s5vpBLLvoX7hOJWZDwDMpJB1anPBdlPuyXKXptmNzRfZwz4dP8u4J6NkM7MiXP41k3BKCgn7Y1qwC8rUwZWheL7P38WrjJDPE//3+rl1EJCJ4iOKAy90a5PRUqqc3BX6INet0wLRsB8jtzrBCTeykpQLdtSJNi5PxpEQf5oObDetsczw5raNDC03TToMC38db+0HixPO8RyerWB9Q9n3P7kX7pbiV/97zUoCyiUFqyZVzY9b2/iUMRQqnqb/Fb3dV0KXSSuFT/FBlyX3Sf1Tx0+fSbIkc8jTeII/Ftw+B+vfkC1U1OxLzFjvGYv8Z0/Nvsl3mtj09vQg8s8XngWCLtJroaY1XD4aPHmt1/RpJYkoqJtVM75wSGmS3UMCky9mMWOG9GMETpDe5op+MyeE2lObw==|uevtUHVbAlr9y513qUY06ddlY3QUMtMDmwLNfM5MBgQ=|10|eb582c0b654a91b72c85f19234c24fa5',
     'x-xf-accept': x_xf_accept
   }
   
@@ -183,7 +183,7 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
   // }
   
   const response1 = await axios({
-    url: 'https://mall-api.haowu.store/goods/queryGoodsListByDisplayResource',
+    url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
     method: 'POST',
     headers,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
@@ -191,15 +191,15 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     data: JSON.stringify({
-      orderBy:"SORT_DESC",
-      page:1,
-      resourceId:6,
-      size:30
+      orderBy: "SORT_DESC",
+      page: 1,
+      resourceId: 6,
+      size: 20
     })
   })
   
   const response2 = await axios({
-    url: 'https://mall-api.haowu.store/goods/queryGoodsListByDisplayResource',
+    url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
     method: 'post',
     headers,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
@@ -207,15 +207,15 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     data: JSON.stringify({
-      orderBy:"SORT_DESC",
-      page:1,
-      resourceId:7,
-      size:30
+      orderBy: "SORT_DESC",
+      page: 1,
+      resourceId: 7,
+      size: 30
     })
   })
   
   const response3 = await axios({
-    url: 'https://mall-api.haowu.store/goods/queryGoodsListByDisplayResource',
+    url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
     method: 'post',
     headers,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
@@ -223,35 +223,35 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort]) {
     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     data: JSON.stringify({
-      orderBy:"SORT_DESC",
-      page:1,
-      resourceId:5,
-      size:30
+      orderBy: "SORT_DESC",
+      page: 1,
+      resourceId: 5,
+      size: 30
     })
   })
   
   // console.log(response.data.data.list, 4444);
   
   return [
-      ...response1.data.data.list,
-      ...response2.data.data.list,
-      ...response3.data.data.list,
+    ...response1.data.data.list,
+    ...response2.data.data.list,
+    ...response3.data.data.list,
   ];
   // print(response.json())
   // return response.json()
 }
 
-async function getDetail(x_xf_accept, [proxyIp, proxyPort], params) {
+async function getDetail(x_xf_accept, [proxyIp, proxyPort], params, token) {
   const headers = {
-    'authority': 'mall-api.haowu.store',
+    'authority': 'mall-api.xwindlab.com',
     'accept': '*/*',
     'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
-    'authorization': '',
+    'authorization': token,
     'cache-control': 'no-cache',
     'content-type': 'application/json;',
-    'origin': 'https://mall-h5.haowu.store',
+    'origin': 'https://mall-h5.xwindlab.com',
     'pragma': 'no-cache',
-    'referer': 'https://mall-h5.haowu.store/',
+    'referer': 'https://mall-h5.xwindlab.com/',
     'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
@@ -263,7 +263,7 @@ async function getDetail(x_xf_accept, [proxyIp, proxyPort], params) {
     'x-xf-accept': x_xf_accept
   }
   const response = await axios({
-    url: 'https://mall-api.haowu.store/goods/queryGoodsDetail',
+    url: 'https://mall-api.xwindlab.com/goods/queryGoodsDetail',
     method: 'POST',
     headers,
     data: params,
@@ -279,9 +279,51 @@ async function getDetail(x_xf_accept, [proxyIp, proxyPort], params) {
   return response.data.data;
 }
 
+async function reLogin([proxyIp, proxyPort]) {
+  const headers = {
+    'Host': 'mall-api.xwindlab.com',
+    'Content-Type': 'application/json',
+    'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Connection': 'keep-alive',
+    'Accept': '*/*',
+    'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+    'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODQ0OTA1NTIsInVzZXJJZCI6MjY2OTAyNDI1ODEwODYyNTMsImlhdCI6MTY4MzI4MDk1Mn0.E3EdCw7sZuV3OJrC8sEKiPeQQ47ynsuoAp0tp1ssuH5Ut5tvB3wfQO3XLYYTGuBk9g4F-lqihdcQx7B6bkPohA',
+    'Content-Length': 142,
+    'X-Unity-Version': '2018.4.36f1',
+  };
+  // console.log(111)
+  const response = await axios({
+    url: 'https://mall-api.xwindlab.com/user/game/refreshLogin',
+    method: 'POST',
+    headers,
+    data: {
+      "sign": "747c829270bffb844530387d74b00186d1832fd84c765243b9bdc4e1f59f7068",
+      "device": "11E1EC1E-8D0D-5C5F-B428-D1B485633D1D",
+      "ts": 1683281069000
+    },
+    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    // data: params
+  });
+  // console.log(response.data, '登录信息')
+  return response.data;
+}
+
+// async function testLogin() {
+//   const proxyRes = await proxyW();
+//   reLogin(proxyRes)
+// }
+
 
 // get_data_bdms_faccdee21b68()
 const token_ = get_token();
+
+const proxyRes = await proxyW();
+const info = await reLogin(proxyRes);
+console.log(info, '登录信息');
 
 export async function getMall(fn) {
   const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
@@ -289,15 +331,17 @@ export async function getMall(fn) {
   const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
   const proxyRes = await proxyW();
   const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
+  // const info = await reLogin(proxyRes);
   
-  
-  const list = await queryGoodsList(x_xf_accept.data.t, proxyRes);
+  const list = await queryGoodsList(x_xf_accept.data.t, proxyRes, info.data.token);
   
   const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
   const detail392 = await getDetail(x_xf_accept1.data.t, proxyRes, {
-    skuId: 392,
-    spuId: "279"
-  })
+    // skuId: 392,
+    spuId: "280"
+  }, info.data.token)
+  
+  // console.log(detail392)
   // list.forEach(async (item) => {
   //   if (item.multiSkuStatus) {
   //     const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
@@ -313,6 +357,6 @@ export async function getMall(fn) {
   
 }
 
-// getMall()
+getMall()
 
 
