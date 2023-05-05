@@ -194,7 +194,7 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
       orderBy: "SORT_DESC",
       page: 1,
       resourceId: 6,
-      size: 20
+      size: 30
     })
   })
   
