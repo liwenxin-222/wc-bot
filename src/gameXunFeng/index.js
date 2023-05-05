@@ -52,7 +52,7 @@ export async function initXunFeng() {
     // console.log(list, 333)
     testLog = list;
   
-    meDing(testLog);
+    // meDing(testLog);
     
     xinping(list);
     kucunChange(list);
