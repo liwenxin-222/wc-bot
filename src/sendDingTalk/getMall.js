@@ -355,17 +355,17 @@ export async function getMall(fn) {
   
   const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
   const detail392 = await getDetail(x_xf_accept1.data.t, proxyRes, {
-    // skuId: 392,
+    skuId: 392,
     spuId: "280"
   })
   
   // console.log(detail392)
-  // list.forEach(async (item) => {
-  //   if (item.multiSkuStatus) {
-  //     const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
-  //     const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
-  //   }
-  // })
+  list.forEach(async (item) => {
+    if (item.multiSkuStatus) {
+      const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
+      const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
+    }
+  })
   
   // console.log(detail392);
   detail392.id = detail392.id + '-' + detail392.skuId;
