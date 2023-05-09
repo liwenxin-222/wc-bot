@@ -279,6 +279,24 @@ async function getDetail(x_xf_accept, [proxyIp, proxyPort], params, token) {
   return response.data.data;
 }
 
+// function generateUUID() {
+//
+//   var d = new Date().getTime();
+//
+//   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+//
+//     var r = (d + Math.random()*16)%16 | 0;
+//
+//     d = Math.floor(d/16);
+//
+//     return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+//
+//   });
+//
+//   return uuid.toUpperCase();
+//
+// };
+
 async function reLogin([proxyIp, proxyPort]) {
   const headers = {
     'Host': 'mall-api.xwindlab.com',
@@ -299,7 +317,7 @@ async function reLogin([proxyIp, proxyPort]) {
     headers,
     data: {
       "sign": "747c829270bffb844530387d74b00186d1832fd84c765243b9bdc4e1f59f7068",
-      "device": "11E1EC1E-8D0D-5C5F-B428-D1B485633D1D",
+      "device": generateUUID(),
       "ts": 1683281069000
     },
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
@@ -321,9 +339,9 @@ async function reLogin([proxyIp, proxyPort]) {
 // get_data_bdms_faccdee21b68()
 const token_ = get_token();
 
-const proxyRes = await proxyW();
-const info = await reLogin(proxyRes);
-console.log(info, '登录信息');
+// const proxyRes = await proxyW();
+// const info = await reLogin(proxyRes);
+// console.log(info, '登录信息');
 
 export async function getMall(fn) {
   const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
@@ -333,13 +351,13 @@ export async function getMall(fn) {
   const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
   // const info = await reLogin(proxyRes);
   
-  const list = await queryGoodsList(x_xf_accept.data.t, proxyRes, info.data.token);
+  const list = await queryGoodsList(x_xf_accept.data.t, proxyRes);
   
   const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
   const detail392 = await getDetail(x_xf_accept1.data.t, proxyRes, {
     // skuId: 392,
     spuId: "280"
-  }, info.data.token)
+  })
   
   // console.log(detail392)
   // list.forEach(async (item) => {

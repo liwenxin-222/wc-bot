@@ -33,7 +33,7 @@ export async function initXunFeng() {
     meDing(testLog);
   });
   
-  setSchedule('0 */1 * * * ?', async () => {
+  setSchedule('0/20 * * * * ?', async () => {
     let newCommodity = [];
     let kucunGengxin = [];
     const list = await getMall();
