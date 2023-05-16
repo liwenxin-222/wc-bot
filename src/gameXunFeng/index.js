@@ -36,7 +36,19 @@ export async function initXunFeng() {
   setSchedule('0/30 * * * * ?', async () => {
     let newCommodity = [];
     let kucunGengxin = [];
-    const list = await getMall();
+    let list = [];
+    try {
+      list = await getMall();
+    } catch (e) {
+      console.log('失败')
+    }
+    
+    if (list && list.length) {
+      testLog = list;
+  
+      xinping(list);
+      kucunChange(list);
+    }
     // const n = Math.ceil(Math.random() * 10);
     // console.log(n, '随机数')
     // if (n > 5) {
@@ -50,12 +62,7 @@ export async function initXunFeng() {
     //
     // }
     // console.log(list, 333)
-    testLog = list;
-  
-    // meDing(testLog);
-    
-    xinping(list);
-    kucunChange(list);
+   
     
     // list.forEach((itemCommodity) => {
     //

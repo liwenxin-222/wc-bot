@@ -136,6 +136,7 @@ async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
   }
   
   const data = coded_v20;
+  console.log(data, 'coded_v20')
   
   const response = await axios({
     url: 'https://sofire.baidu.com/abot/api/v1/tpl/commit',
@@ -195,7 +196,8 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
       page: 1,
       resourceId: 6,
       size: 30
-    })
+    }),
+    timeout: 10000,
   })
   
   const response2 = await axios({
@@ -211,7 +213,8 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
       page: 1,
       resourceId: 7,
       size: 30
-    })
+    }),
+    timeout: 10000,
   })
   
   const response3 = await axios({
@@ -227,7 +230,8 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
       page: 1,
       resourceId: 5,
       size: 30
-    })
+    }),
+    timeout: 10000,
   })
   
   // console.log(response.data.data.list, 4444);
@@ -267,6 +271,7 @@ async function getDetail(x_xf_accept, [proxyIp, proxyPort], params, token) {
     method: 'POST',
     headers,
     data: params,
+    timeout: 10000,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
@@ -279,25 +284,59 @@ async function getDetail(x_xf_accept, [proxyIp, proxyPort], params, token) {
   return response.data.data;
 }
 
-// function generateUUID() {
-//
-//   var d = new Date().getTime();
-//
-//   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-//
-//     var r = (d + Math.random()*16)%16 | 0;
-//
-//     d = Math.floor(d/16);
-//
-//     return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-//
-//   });
-//
-//   return uuid.toUpperCase();
-//
-// };
+function generateUUID() {
+  
+  var d = new Date().getTime();
+  
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    
+    var r = (d + Math.random() * 16) % 16 | 0;
+    
+    d = Math.floor(d / 16);
+    
+    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    
+  });
+  
+  return uuid.toUpperCase();
+  
+};
+
+const TokenMapList = [
+  //   我电脑
+  {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU0MjUxNDQsInVzZXJJZCI6Mzc2NTkzNTI0NTAxOTU1NDYsImlhdCI6MTY4NDIxNTU0NH0.7o-kKjXb9s334V3YRn3bVv7hzhUJviomMeKTZ7MvgCveS5saOUzBY6Mc-TSBjKKMeks8qhT0r0FMBPDMEIXwHQ',
+    token: {
+      ts: 1684215594000,
+      sign: '51999575e642e14872e57eba223d8a4472e16c7fa0dcb522ee46c44be575b52c',
+      device: '11E1EC1E-8D0D-5C5F-B428-D1B485633D1D',
+    }
+  },
+  //   我手机
+  {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODQ5NDU3NjMsInVzZXJJZCI6MjE3NzU5NTEyODEyMzgwODgsImlhdCI6MTY4MzczNjE2M30.Y69QzimccfFZ5IxwkCpf1D4xurcXuKu_vDLry2LpbuatQ8KUHaLjbcZnnzzTjyxKVy9tQhzzEgJszf31i1pOXg',
+    token: {
+      "sign": "07bd54a30b40bbc1f8be919f3783f47e01ac96d0f6a4375f6ef07fe81d865636",
+      "device": "FE3E1605-C543-4B94-9E8E-61A17FBAF8BA",
+      "ts": 1683769466000
+    }
+  },
+  //   郭达
+  {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODUzNjA5MDgsInVzZXJJZCI6NDAwNzA0NjcyODUxODg2MzMsImlhdCI6MTY4NDE1MTMwOH0.8N8vQH5t2KShW7ivTdRD3HB6RdQwN-V4fSZd8oRGGXiQATEdikjiDxi6_ZHd-YAo-nz6jF2QoEzseFQiXC6XFQ',
+    token: {
+      "device": "208967DD-8382-5CA9-BBCF-C1FD6CD45650",
+      "ts": 1684151967000,
+      "sign": "cde194f325ad44d4b60e3be74bc83374120125dadd88a6c95828336ac1aabd68"
+    }
+  }
+]
 
 async function reLogin([proxyIp, proxyPort]) {
+  const randomNum = parseInt(Math.random() * 3);
+  const ttt = TokenMapList[randomNum];
+  
+  console.log('随机的谁---->>>>', randomNum);
   const headers = {
     'Host': 'mall-api.xwindlab.com',
     'Content-Type': 'application/json',
@@ -306,7 +345,7 @@ async function reLogin([proxyIp, proxyPort]) {
     'Connection': 'keep-alive',
     'Accept': '*/*',
     'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
-    'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODQ0OTA1NTIsInVzZXJJZCI6MjY2OTAyNDI1ODEwODYyNTMsImlhdCI6MTY4MzI4MDk1Mn0.E3EdCw7sZuV3OJrC8sEKiPeQQ47ynsuoAp0tp1ssuH5Ut5tvB3wfQO3XLYYTGuBk9g4F-lqihdcQx7B6bkPohA',
+    'Authorization': ttt.Authorization,
     'Content-Length': 142,
     'X-Unity-Version': '2018.4.36f1',
   };
@@ -315,11 +354,7 @@ async function reLogin([proxyIp, proxyPort]) {
     url: 'https://mall-api.xwindlab.com/user/game/refreshLogin',
     method: 'POST',
     headers,
-    data: {
-      "sign": "747c829270bffb844530387d74b00186d1832fd84c765243b9bdc4e1f59f7068",
-      "device": generateUUID(),
-      "ts": 1683281069000
-    },
+    data: ttt.token,
     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
@@ -340,24 +375,26 @@ async function reLogin([proxyIp, proxyPort]) {
 const token_ = get_token();
 
 // const proxyRes = await proxyW();
-// const info = await reLogin(proxyRes);
-// console.log(info, '登录信息');
+
 
 export async function getMall(fn) {
   const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
-  
+  console.log(data_bdms_faccdee21b68, 'data_bdms_faccdee21b68')
   const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
   const proxyRes = await proxyW();
+  const info = await reLogin(proxyRes);
+  console.log(info, '登录信息');
   const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
+  console.log('风控码', x_xf_accept);
   // const info = await reLogin(proxyRes);
   
-  const list = await queryGoodsList(x_xf_accept.data.t, proxyRes);
+  const list = await queryGoodsList(x_xf_accept.data.t, proxyRes, info.data.token);
   
   const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
   const detail392 = await getDetail(x_xf_accept1.data.t, proxyRes, {
     skuId: 392,
     spuId: "280"
-  })
+  }, info.data.token)
   
   // console.log(detail392)
   list.forEach(async (item) => {
