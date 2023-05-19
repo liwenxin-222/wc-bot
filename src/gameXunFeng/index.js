@@ -33,7 +33,9 @@ export async function initXunFeng() {
     meDing(testLog);
   });
   
+  // setSchedule('0 */1 * * * ?', async () => {
   setSchedule('0/30 * * * * ?', async () => {
+    // if ()
     let newCommodity = [];
     let kucunGengxin = [];
     let list = [];
@@ -49,97 +51,6 @@ export async function initXunFeng() {
       xinping(list);
       kucunChange(list);
     }
-    // const n = Math.ceil(Math.random() * 10);
-    // console.log(n, '随机数')
-    // if (n > 5) {
-    //   list.push({"id":390,"name":"月亮时光马克杯系列（内含6种规格）","minPrice":238.000000000000000000,"listUrl":"https://mall-res.haowu.store/prod/20230410/goods/bdbf9a66c84f4dc59c077ca9338f3a24.jpeg","multiSkuStatus":true,"sloganMap":{"1":"确认收货后按照实付金额2:1返元贝"},"originPrice":298.000000000000000000,"shopDisplayInfo":null,"hasInv":false,"inventory": 10})
-    //   // list[2].inventory = Math.ceil(Math.random() * 10);
-    //   // list[2].sloganMap = {"1":"请点击背包内“立春·美自天成”数字1:1藏品“行权”按钮进行购买"}
-    //   // console.log(list[0], Math.ceil(Math.random() * 10))
-    //
-    // } else {
-    //   list.push({"id":390,"name":"月亮时光马克杯系列（内含6种规格）","minPrice":238.000000000000000000,"listUrl":"https://mall-res.haowu.store/prod/20230410/goods/bdbf9a66c84f4dc59c077ca9338f3a24.jpeg","multiSkuStatus":true,"sloganMap":{"1":"确认收货后按照实付金额2:1返元贝"},"originPrice":298.000000000000000000,"shopDisplayInfo":null,"hasInv":false,"inventory": 0})
-    //
-    // }
-    // console.log(list, 333)
-   
-    
-    // list.forEach((itemCommodity) => {
-    //
-    //   const orName = itemCommodity.name;
-    //   let afterName = itemCommodity.name;
-    //
-    //   oldCommodityWhiteList.forEach((wkk) => {
-    //     afterName = afterName.replace(wkk, '');
-    //   });
-    //
-    //   if (orName === afterName && (itemCommodity.inventory > 5)) {
-    //     newCommodity.push(itemCommodity);
-    //   }
-    //
-    //   if (itemCommodity.inventory > 5) {
-    //     kucunGengxin.push(itemCommodity);
-    //   }
-    //
-    //
-    // });
-    //
-    // console.log(list.length, newCommodity, kucunGengxin, 66666);
-    //
-    //
-    // if (kucunGengxin.length > 0) {
-    //
-    //   let str = '### 集市上新品了！！！！！！！！\n ';
-    //   kucunGengxin.forEach((item) => {
-    //     const price = item.minPrice === item.maxPrice ? item.maxPrice : `${item.minPrice}~${item.maxPrice}`;
-    //     str += `> 名称：${item.name} \n > 价格：${price} \n > 库存：${item.inventory} \n > 比例：${item.sloganMap[1]} \n-------\n`
-    //   })
-    //   // SendDingTalkTest(str);
-    //
-    //   LOG.info(str);
-    //
-    //   if (
-    //       currentStr !== str
-    //   ) {
-    //     try {
-    //       currentStr = str;
-    //       //  第一次不通知
-    //       if (first) {
-    //         first = false;
-    //
-    //         console.log('第一次不通知');
-    //         return;
-    //       }
-    //       console.log('已发送钉钉消息');
-    //       SendDingTalkMarkdown(str);
-    //
-    //
-    //       //  电话通知
-    //       // if (
-    //       //     (newCommodity.length > 0)
-    //       // ) {
-    //       //   try {
-    //       //
-    //       //     if (!calledFlag) {
-    //       //
-    //       //       calledFlag = true;
-    //       //       aiCallInit();
-    //       //     }
-    //       //
-    //       //   } catch (e) {
-    //       //     //   e
-    //       //   }
-    //       // }
-    //       //
-    //
-    //     } catch (e) {
-    //       console.log(e);
-    //     }
-    //
-    //   }
-    //
-    // }
-    
   })
   
 }

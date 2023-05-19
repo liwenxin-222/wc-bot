@@ -92,16 +92,19 @@ export function kucunChange (list) {
   const validList = [];
   
   const newSourceMap = {};
-  list.forEach((item) => {
+  list.filter((item) => {
+    const text = (item && item.sloganMap && item.sloganMap[1]) || '';
+    return /1[:：][0-9]/.test(text);
+  }).forEach((item) => {
     newSourceMap[item.id] = item.inventory || item.hasInv;
   });
+  console.log(newSourceMap)
   
   if (!currentSourceMap) {
     console.log('库存通知，第一次，不提醒')
     currentSourceMap = Object.assign({}, newSourceMap);
     return;
   }
-  console.log(currentSourceMap, newSourceMap)
   if (JSON.stringify(currentSourceMap) === JSON.stringify(newSourceMap)) {
     console.log('库存通知，前后两次一样，不提醒')
     return;

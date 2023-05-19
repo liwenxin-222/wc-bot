@@ -136,7 +136,7 @@ async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
   }
   
   const data = coded_v20;
-  console.log(data, 'coded_v20')
+  // console.log(data, 'coded_v20')
   
   const response = await axios({
     url: 'https://sofire.baidu.com/abot/api/v1/tpl/commit',
@@ -153,11 +153,11 @@ async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
   });
   
   // console.log(response.data, 3333);
-  return response.data;
+  return response.data.data.t + ';;' + 'ios';
 }
 
 async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
-  console.log(x_xf_accept, 'token')
+  // console.log(x_xf_accept, 'token')
   const headers = {
     'authority': 'mall-api.xwindlab.com',
     'accept': '*/*',
@@ -332,38 +332,38 @@ const TokenMapList = [
   }
 ]
 
-async function reLogin([proxyIp, proxyPort]) {
-  const randomNum = parseInt(Math.random() * 3);
-  const ttt = TokenMapList[randomNum];
-  
-  console.log('随机的谁---->>>>', randomNum);
-  const headers = {
-    'Host': 'mall-api.xwindlab.com',
-    'Content-Type': 'application/json',
-    'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Connection': 'keep-alive',
-    'Accept': '*/*',
-    'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
-    'Authorization': ttt.Authorization,
-    'Content-Length': 142,
-    'X-Unity-Version': '2018.4.36f1',
-  };
-  // console.log(111)
-  const response = await axios({
-    url: 'https://mall-api.xwindlab.com/user/game/refreshLogin',
-    method: 'POST',
-    headers,
-    data: ttt.token,
-    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // data: params
-  });
-  // console.log(response.data, '登录信息')
-  return response.data;
-}
+// async function reLogin([proxyIp, proxyPort]) {
+//   const randomNum = parseInt(Math.random() * 3);
+//   const ttt = TokenMapList[2];
+//
+//   console.log('随机的谁---->>>>', randomNum);
+//   const headers = {
+//     'Host': 'mall-api.xwindlab.com',
+//     'Content-Type': 'application/json',
+//     'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+//     'Accept-Encoding': 'gzip, deflate, br',
+//     'Connection': 'keep-alive',
+//     'Accept': '*/*',
+//     'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+//     'Authorization': ttt.Authorization,
+//     'Content-Length': 142,
+//     'X-Unity-Version': '2018.4.36f1',
+//   };
+//   // console.log(111)
+//   const response = await axios({
+//     url: 'https://mall-api.xwindlab.com/user/game/refreshLogin',
+//     method: 'POST',
+//     headers,
+//     data: ttt.token,
+//     // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+//     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+//     // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+//     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+//     // data: params
+//   });
+//   // console.log(response.data, '登录信息')
+//   return response.data;
+// }
 
 // async function testLogin() {
 //   const proxyRes = await proxyW();
@@ -379,36 +379,34 @@ const token_ = get_token();
 
 export async function getMall(fn) {
   const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
-  console.log(data_bdms_faccdee21b68, 'data_bdms_faccdee21b68')
+  // console.log(data_bdms_faccdee21b68, 'data_bdms_faccdee21b68')
   const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
   const proxyRes = await proxyW();
-  const info = await reLogin(proxyRes);
-  console.log(info, '登录信息');
+  // const info = await reLogin(proxyRes);
+  // console.log(info, '登录信息');
   const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
-  console.log('风控码', x_xf_accept);
+  // console.log('风控码', x_xf_accept);
   // const info = await reLogin(proxyRes);
   
-  const list = await queryGoodsList(x_xf_accept.data.t, proxyRes, info.data.token);
+  const randomNum = parseInt(Math.random() * 3);
+  const ttt = TokenMapList[randomNum];
+  console.log('随机的是', randomNum)
+  const list = await queryGoodsList(x_xf_accept, proxyRes, ttt.Authorization);
   
-  const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
-  const detail392 = await getDetail(x_xf_accept1.data.t, proxyRes, {
-    skuId: 392,
-    spuId: "280"
-  }, info.data.token)
+  // const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
+  // const detail392 = await getDetail(x_xf_accept, proxyRes, {
+  //   "skuId": 179,
+  //   "spuId": 166,
+  // }, ttt.Authorization)
   
   // console.log(detail392)
-  list.forEach(async (item) => {
-    if (item.multiSkuStatus) {
-      const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
-      const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
-    }
-  })
+  return list
   
   // console.log(detail392);
-  detail392.id = detail392.id + '-' + detail392.skuId;
-  list.push(detail392);
-  console.log(list)
-  return list;
+  // detail392.id = detail392.id + '-' + detail392.skuId;
+  // list.push(detail392);
+  // console.log(list)
+  // return list;
   
 }
 
