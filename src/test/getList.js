@@ -2,10 +2,48 @@ import axios from 'axios'
 import {proxyW} from '../sendDingTalk/getProxy.js'
 import HttpsProxyAgent from 'https-proxy-agent';
 import { submit } from './mall-h5.js'
+import { token } from './env.js'
 
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU2ODkyMjUsInVzZXJJZCI6MjY2OTAyNDI1ODEwODYyNTMsImlhdCI6MTY4NDQ3OTYyNX0.EX0FtFqJNHaYrHYZln6lvFm8ysfgRMGZEgyngG495rCxn56-sNTpRLW85QiDJvWbnWLGR_Z2dF2_7YbJjLg7Nw'
+// submit({ spuId: item.id, skuId, token, qty: count, addressId })
+export const getAddress = async function() {
+  if (this.addressId) return this.addressId
+  const response = await axios({
+    url: 'https:/mall-api.xwindlab.com/user/address/list',
+    method: 'GET',
+    headers: {
+      Authorization: this.token
+    },
+  })
+  let [{ id }] = response.data.data.list
+  this.addressId = id
+}
+
+export const buyFun = async function(spuId) {
+  let [ proxyIp, proxyPort ] = await proxyW();
+
+  const detailRes = await axios({
+    url: 'https://mall-api.xwindlab.com/goods/queryGoodsDetail',
+    method: 'POST',
+    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+    data: { spuId },
+  })
+
+  await this.getAddress()
+
+  console.log(this.addressId, 22)
+
+  let { skuList: [{ skuId }] = [{}] } = detailRes.data.data || {} //商品类别_id
+
+  let count = detailRes?.data?.data?.skuActivityInfoVO?.limitPerUser || 1 //购买数量 
+
+  this.submit({ spuId, skuId, token: this.token, qty: count, addressId: this.addressId })
+}
+
+// buyFun()
 
 export async function queryGoodsListByDisplayResource() {
+  let addressId = await geyAddress()
 
   let [ proxyIp, proxyPort ] = await proxyW();
 
@@ -24,7 +62,7 @@ export async function queryGoodsListByDisplayResource() {
       resourceId: 6,
       size: 30,
     },
-  });
+  }).catch(() => ({ data: { data: { list } } }))
   // console.log(response1, 444);
 
   const response2 = await axios({
@@ -40,7 +78,7 @@ export async function queryGoodsListByDisplayResource() {
       resourceId: 7,
       size: 30,
     },
-  });
+  }).catch(() => ({ data: { data: { list } } }))
   
   
   // console.log(detailOtherList);
@@ -57,8 +95,9 @@ export async function queryGoodsListByDisplayResource() {
       page: 1,
       resourceId: 5,
       size: 30,
-    },
-  });
+    }
+  }).catch(() => ({ data: { data: { list } } }))
+
   const list = [
     ...response1.data.data.list,
     ...response2.data.data.list,
@@ -92,7 +131,8 @@ export async function queryGoodsListByDisplayResource() {
     let { skuList: [{ skuId }] = [{}], inventory } = detailRes.data.data || {} //商品类别_id
     if (!inventory) continue
     let count = Math.min(inventory, detailRes?.data?.data?.skuActivityInfoVO?.limitPerUser || 1) //购买数量 
-    submit({ spuId: item.id, skuId, token, qty: count })
+
+    submit({ spuId: item.id, skuId, token, qty: count, addressId })
 
     if (item.multiSkuStatus) {
 
@@ -123,4 +163,4 @@ export async function queryGoodsListByDisplayResource() {
   }
 }
 
-queryGoodsListByDisplayResource()
+// queryGoodsListByDisplayResource()

@@ -2,6 +2,7 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import HttpsProxyAgent from 'https-proxy-agent';
 import {proxyW} from '../sendDingTalk/getProxy.js';
+// import { token, sign, gbid, userId } from './env.js'
 
 async function get_data_bdms_faccdee21b68() {
   const headers = {
@@ -141,8 +142,7 @@ async function getDetail(x_xf_accept, [proxyIp, proxyPort], params, token) {
   return response.data.data;
 }
 
-export async function submit({ spuId, skuId, token, qty = 1 }) {
-
+export async function submit({ spuId, skuId, qty = 1, addressId }) {
   const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
   const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
   
@@ -171,23 +171,28 @@ export async function submit({ spuId, skuId, token, qty = 1 }) {
       origin: 'https://mall-h5.xwindlab.com',
       referer: 'https://mall-h5.xwindlab.com/',
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
-      authorization: token,
+      authorization: this.token,
       'x-xf-accept': x_xf_accept,
     },
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     data: {
-      "qty": qty,
+      qty,
       skuId,
       spuId,
       "cardId": "",
       "goodsCode": `${spuId}${skuId}`
     },
-  });
+  }).catch(error => ({}))
   
   console.log(checkoutRes.data, 'checkoutRes');
+
+  if (!checkoutRes?.data?.data?.rid) return
+
   const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
-  
+
+  console.log(x_xf_accept1, 'x_xf_accept1')
+
   const commitRes = await axios({
     url: 'https://mall-api.xwindlab.com/order/commit',
     method: 'POST',
@@ -201,22 +206,22 @@ export async function submit({ spuId, skuId, token, qty = 1 }) {
       origin: 'https://mall-h5.xwindlab.com',
       referer: 'https://mall-h5.xwindlab.com/',
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
-      authorization: token,
+      authorization: this.token,
       'x-xf-accept': x_xf_accept1,
     },
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     data: {
-      "qty": qty,
+      qty,
       skuId,
       spuId,
-      "addressId": 168505,
+      addressId,
       "rid": checkoutRes.data.data.rid,
-      "gbid": "2816193124903996609",
+      gbid: this.gbid,
       "cardId": "",
-      "userId": "26690242581086253",
+      userId: this.userId,
       "extra": "",
-      "sign": "3f9db18070e438d7f648deb68a648916fcafd2d411ce83793fb52231f0af5d2e",
+      sign: this.sign,
       "goodsCode": `${spuId}${skuId}`,
       "bankId": 5
     },
