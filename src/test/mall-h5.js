@@ -141,7 +141,7 @@ async function getDetail(x_xf_accept, [proxyIp, proxyPort], params, token) {
   return response.data.data;
 }
 
-async function submit(token) {
+export async function submit({ spuId, skuId, token, qty = 1 }) {
 
   const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
   const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
@@ -150,12 +150,12 @@ async function submit(token) {
   const [proxyIp, proxyPort] = proxyRes;
   
   const x_xf_accept2 = await get_x_xf_accept(coded_v20, proxyRes);
-  const detail392 = await getDetail(x_xf_accept2, proxyRes, {
-    "skuId": "640",
-    "spuId": "468",
-  }, token)
+  // const detail392 = await getDetail(x_xf_accept2, proxyRes, {
+  //   skuId,
+  //   spuId
+  // }, token)
   
-  console.log(detail392)
+  // console.log(detail392)
   const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
   
   const checkoutRes = await axios({
@@ -177,11 +177,11 @@ async function submit(token) {
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     data: {
-      "qty": "1",
-      "skuId": "640",
-      "spuId": "468",
+      "qty": qty,
+      skuId,
+      spuId,
       "cardId": "",
-      "goodsCode": "468640"
+      "goodsCode": `${spuId}${skuId}`
     },
   });
   
@@ -207,9 +207,9 @@ async function submit(token) {
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
     data: {
-      "qty": 1,
-      "skuId": 640,
-      "spuId": 468,
+      "qty": qty,
+      skuId,
+      spuId,
       "addressId": 168505,
       "rid": checkoutRes.data.data.rid,
       "gbid": "2816193124903996609",
@@ -217,7 +217,7 @@ async function submit(token) {
       "userId": "26690242581086253",
       "extra": "",
       "sign": "3f9db18070e438d7f648deb68a648916fcafd2d411ce83793fb52231f0af5d2e",
-      "goodsCode": "468640",
+      "goodsCode": `${spuId}${skuId}`,
       "bankId": 5
     },
   });
@@ -235,6 +235,6 @@ export async function getMall(fn) {
   
 }
 
-getMall()
+// getMall()
 
 
