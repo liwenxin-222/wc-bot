@@ -6,10 +6,10 @@ const tab_2 = tabs[1]
 const tab_3 = tabs[2]
 
 const setUser = () => {
-  uni.setStorageSync('token','eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU1NDIxNjgsInVzZXJJZCI6Mzc2NTkzNTI0NTAxOTU1NDYsImlhdCI6MTY4NDMzMjU2OH0.fQMd0c2Bg1J-CvBv7A0-JbD_tC5chP_mnBDzMvZVBERE8kqgtL21KfWyTbfWzCImVaM1C3Cv3cU_w_8214PGIA')
+  uni.setStorageSync('token','eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYxNDY3NzQsInVzZXJJZCI6NDM1Mjg2ODMzMzIzNjI3OSwiaWF0IjoxNjg0OTM3MTc0fQ.jRqSZvSJs9a-ylwTZbZB2Gd_JdF9wueuqQNJpDrGdbdQFcMpitjWtBPHMgOFOYxWPLcFNb8JwK3EUBOwTjqBHA')
   uni.setStorageSync('platform', 'ios');
-  uni.setStorageSync('gbid', '2818726984711887873')
-  uni.setStorageSync('userid', '37659352450195546')
+  uni.setStorageSync('gbid', '2816191933569323441')
+  uni.setStorageSync('userid', '4352868333236279')
 }
 
 // 创建轮询 callback返回值为true时结束轮询 返回结果为callback执行结果
@@ -21,7 +21,7 @@ const createPolling = async (callback) => {
         resolve(res)
         clearInterval(intervalId)
       }
-    })
+    }, 300)
   })
 }
 
@@ -46,14 +46,14 @@ const sleep = (time) => {
 
 const exec = async () => {
   setUser() //设置基本信息
-
-  tab_2.click()
+  tab_1.click()
 
   await sleep(1000)
 
-  tab_1.click()
+  tab_2.click()
+  
 
-  let el = await createPolling(() => getGoodBtnByName('【巽风文创】二十四节气系列之春季餐具套装')) //需要购买的元素的按钮
+  let el = await createPolling(() => getGoodBtnByName('哈尔斯智能直杯套装')) //需要购买的元素的按钮
   el.click()
   
   await sleep(100)

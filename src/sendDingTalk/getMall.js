@@ -197,7 +197,7 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
       resourceId: 6,
       size: 30
     }),
-    timeout: 10000,
+    // timeout: 10000,
   })
   
   const response2 = await axios({
@@ -214,7 +214,7 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
       resourceId: 7,
       size: 30
     }),
-    timeout: 10000,
+    // timeout: 10000,
   })
   
   const response3 = await axios({
@@ -231,7 +231,7 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
       resourceId: 5,
       size: 30
     }),
-    timeout: 10000,
+    // timeout: 10000,
   })
   
   // console.log(response.data.data.list, 4444);
@@ -302,36 +302,6 @@ function generateUUID() {
   
 };
 
-const TokenMapList = [
-  //   我电脑
-  {
-    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU0MjUxNDQsInVzZXJJZCI6Mzc2NTkzNTI0NTAxOTU1NDYsImlhdCI6MTY4NDIxNTU0NH0.7o-kKjXb9s334V3YRn3bVv7hzhUJviomMeKTZ7MvgCveS5saOUzBY6Mc-TSBjKKMeks8qhT0r0FMBPDMEIXwHQ',
-    token: {
-      ts: 1684215594000,
-      sign: '51999575e642e14872e57eba223d8a4472e16c7fa0dcb522ee46c44be575b52c',
-      device: '11E1EC1E-8D0D-5C5F-B428-D1B485633D1D',
-    }
-  },
-  //   我手机
-  {
-    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODQ5NDU3NjMsInVzZXJJZCI6MjE3NzU5NTEyODEyMzgwODgsImlhdCI6MTY4MzczNjE2M30.Y69QzimccfFZ5IxwkCpf1D4xurcXuKu_vDLry2LpbuatQ8KUHaLjbcZnnzzTjyxKVy9tQhzzEgJszf31i1pOXg',
-    token: {
-      "sign": "07bd54a30b40bbc1f8be919f3783f47e01ac96d0f6a4375f6ef07fe81d865636",
-      "device": "FE3E1605-C543-4B94-9E8E-61A17FBAF8BA",
-      "ts": 1683769466000
-    }
-  },
-  //   郭达
-  {
-    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODUzNjA5MDgsInVzZXJJZCI6NDAwNzA0NjcyODUxODg2MzMsImlhdCI6MTY4NDE1MTMwOH0.8N8vQH5t2KShW7ivTdRD3HB6RdQwN-V4fSZd8oRGGXiQATEdikjiDxi6_ZHd-YAo-nz6jF2QoEzseFQiXC6XFQ',
-    token: {
-      "device": "208967DD-8382-5CA9-BBCF-C1FD6CD45650",
-      "ts": 1684151967000,
-      "sign": "cde194f325ad44d4b60e3be74bc83374120125dadd88a6c95828336ac1aabd68"
-    }
-  }
-]
-
 // async function reLogin([proxyIp, proxyPort]) {
 //   const randomNum = parseInt(Math.random() * 3);
 //   const ttt = TokenMapList[2];
@@ -377,7 +347,7 @@ const token_ = get_token();
 // const proxyRes = await proxyW();
 
 
-export async function getMall(fn) {
+export async function getMall(TOKEN) {
   const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
   // console.log(data_bdms_faccdee21b68, 'data_bdms_faccdee21b68')
   const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
@@ -388,15 +358,15 @@ export async function getMall(fn) {
   // console.log('风控码', x_xf_accept);
   // const info = await reLogin(proxyRes);
   
-  const randomNum = parseInt(Math.random() * 3);
-  const ttt = TokenMapList[randomNum];
-  console.log('随机的是', randomNum)
-  const list = await queryGoodsList(x_xf_accept, proxyRes, ttt.Authorization);
+  // const randomNum = parseInt(Math.random() * 3);
+  // const ttt = TokenMapList[randomNum];
+  // console.log('随机的是', randomNum)
+  const list = await queryGoodsList(x_xf_accept, proxyRes, TOKEN);
   
   // const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
   // const detail392 = await getDetail(x_xf_accept, proxyRes, {
-  //   "skuId": 179,
-  //   "spuId": 166,
+  //   "skuId": 640,
+  //   "spuId": 468,
   // }, ttt.Authorization)
   
   // console.log(detail392)
@@ -410,6 +380,33 @@ export async function getMall(fn) {
   
 }
 
-getMall()
+const TokenMapList = [
+  //
+  {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU0MjUxNDQsInVzZXJJZCI6Mzc2NTkzNTI0NTAxOTU1NDYsImlhdCI6MTY4NDIxNTU0NH0.7o-kKjXb9s334V3YRn3bVv7hzhUJviomMeKTZ7MvgCveS5saOUzBY6Mc-TSBjKKMeks8qhT0r0FMBPDMEIXwHQ',
+    name: '我电脑'
+  },
+  //
+  {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4Mzk5OTgsInVzZXJJZCI6MjE3NzU5NTEyODEyMzgwODgsImlhdCI6MTY4NDYzMDM5OH0.UTNIJwpLehcibpKWDWhk9t3ykllq1D2d_bPVai8h7pCHYqRqOpvIOrufI_fTJN2i_c1Y6r-aPCPPKaSA3F0rkQ',
+    name: '我手机'
+  },
+  //   郭达
+  {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODUzNjA5MDgsInVzZXJJZCI6NDAwNzA0NjcyODUxODg2MzMsImlhdCI6MTY4NDE1MTMwOH0.8N8vQH5t2KShW7ivTdRD3HB6RdQwN-V4fSZd8oRGGXiQATEdikjiDxi6_ZHd-YAo-nz6jF2QoEzseFQiXC6XFQ',
+    name: '郭达'
+  },
+  
+  {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYzODM0MzAsInVzZXJJZCI6NTM1NzA2MDkwMDI5NDI1MTYsImlhdCI6MTY4NTE3MzgzMH0.XaVCPqYIr2S66VG4u2gIOsVJx7StK1N6g8oom8vOwpMSHiTtOBov3ogvUobzZGLY6GhoBXy45ssHFxe_5Oi6YA',
+    name: '老田给我手机的'
+  },
+  {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYzODMxMDMsInVzZXJJZCI6NTM1NzU2MjIwNTYwNDY1OTgsImlhdCI6MTY4NTE3MzUwM30.WqueMZvE3s2ePeuqMV4t1qG-kMVMrYq53tn1_Og4jNy2wnu_YXq0YPyYaRbI0XKTbSetoIuVSgtWO2yrJfCGpg',
+    name: '老田自己ipad'
+  },
+]
+
+// getMall(TokenMapList[0].Authorization);
 
 

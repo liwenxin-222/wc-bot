@@ -1,4 +1,4 @@
-import {SendDingTalkMarkdown, SendDingTalkTest} from '../sendDingTalk/index.js'
+import {SendDingTalkMarkdown, SendDingTalkUserCantUse} from '../sendDingTalk/index.js'
 import pino from 'pino';
 
 let currentItemIds = [];
@@ -88,8 +88,24 @@ export function xinping(list) {
 
 
 let currentSourceMap = null;
-export function kucunChange (list) {
+export function kucunChange (list, name) {
   const validList = [];
+  let userHasInv = false;
+  const userHasMap = {};
+  
+  for (let i=0;i<list.length;i++) {
+    if (list[i].hasInv) {
+      userHasInv = true;
+      userHasMap[list[i].id] = list[i].hasInv
+      break;
+    }
+  }
+  console.log(userHasMap, name)
+  if (!userHasInv) {
+    console.log(list.map((item) => ([item.name, item.hasInv])))
+    SendDingTalkUserCantUse(`${name} 失效了。请检查！`)
+    return;
+  }
   
   const newSourceMap = {};
   list.filter((item) => {
@@ -98,7 +114,8 @@ export function kucunChange (list) {
   }).forEach((item) => {
     newSourceMap[item.id] = item.inventory || item.hasInv;
   });
-  console.log(newSourceMap)
+
+  // console.log(newSourceMap)
   
   if (!currentSourceMap) {
     console.log('库存通知，第一次，不提醒')
@@ -131,6 +148,16 @@ export function kucunChange (list) {
     console.log(str);
     LOG.info(str);
     SendDingTalkMarkdown(str, {isAtAll: !!isAtAll});
+    //
+    // validList.forEach(async (item) => {
+    //   const user1 = new User({
+    //     token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU3MjQ4MzMsInVzZXJJZCI6MjY2OTAyNDI1ODEwODYyNTMsImlhdCI6MTY4NDUxNTIzM30.KYuCnFfiSwL_54IwCRkxVd-WFOnmwq-zJWl43oDnalrvEQ7acZfp0SK_AGxGL6Xxa1JfVnXAziC5a1xwvCOciA',
+    //     sign: '5fe07f3b7cb4e81898ebfcccbd279e7e2e1f8f2651e0177d83a40007f79abf13',
+    //     gbid: '2816193124903996609',
+    //     userId: '26690242581086253'
+    //   })
+    //   await user1.buyFun(item.id);
+    // })
     // SendDingTalkTest(str, {isAtAll: !!isAtAll});
   }
   currentSourceMap = Object.assign({}, newSourceMap);

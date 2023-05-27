@@ -2,6 +2,7 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import HttpsProxyAgent from 'https-proxy-agent';
 import {proxyW} from '../sendDingTalk/getProxy.js';
+
 // import { token, sign, gbid, userId } from './env.js'
 
 async function get_data_bdms_faccdee21b68() {
@@ -99,7 +100,7 @@ async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
     data: data,
   });
   
-  return response.data.data.t + ';;' + 'ios';
+  return response.data.data.t + ';;;;' + 'ios';
 }
 
 
@@ -142,21 +143,70 @@ async function getDetail(x_xf_accept, [proxyIp, proxyPort], params, token) {
   return response.data.data;
 }
 
-export async function submit({ spuId, skuId, qty = 1, addressId }) {
+export async function submit({spuId, skuId, token, qty = 1, addressId, proxyRes}) {
   const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
   const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
   
-  const proxyRes = await proxyW();
+  // const proxyRes = await proxyW();
   const [proxyIp, proxyPort] = proxyRes;
   
-  const x_xf_accept2 = await get_x_xf_accept(coded_v20, proxyRes);
+  // const x_xf_accept2 = await get_x_xf_accept(coded_v20, proxyRes);
   // const detail392 = await getDetail(x_xf_accept2, proxyRes, {
   //   skuId,
   //   spuId
   // }, token)
   
   // console.log(detail392)
+  try {
+    const batchUpload0 = await axios({
+      url: 'https://mall-api.xwindlab.com/log/info/batchUpload',
+      method: 'POST',
+      headers: {
+        authority: 'mall-api.xwindlab.com',
+        // accept: '*/*',
+        // 'accept-language': 'zh-CN,zh-Hans;q=0.9',
+        // 'accept-encoding': 'gzip, deflate, br',
+        // 'content-length': 72,
+        // 'content-type': 'application/json;',
+        origin: 'https://mall-h5.xwindlab.com',
+        referer: 'https://mall-h5.xwindlab.com/',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
+        authorization: this.token,
+        // 'x-xf-accept': x_xf_accept,
+      },
+      httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      data: {
+        biz: "mall",
+        bodyList: [
+          JSON.stringify({
+            spuId,
+            skuId,
+            qty,
+            addressData: {
+              address: "",
+              cityCode: "",
+              cityName: "",
+              districtCode: "",
+              districtName: "",
+              id: "",
+              isDefault: 1,
+              phone: "",
+              provinceCode: "",
+              provinceName: "",
+              username: "",
+            },
+          })
+        ],
+        event:"click",
+        extra1:"buy_btn",
+        page:"goods_details",
+      },
+    }).catch(error => ({}))
+  } catch (e) {}
+  
   const x_xf_accept = await get_x_xf_accept(coded_v20, proxyRes);
+  console.log('下单参数-->', "goodsCode " + `${spuId}-${skuId}-${addressId}`)
   
   const checkoutRes = await axios({
     url: 'https://mall-api.xwindlab.com/order/checkout',
@@ -171,7 +221,7 @@ export async function submit({ spuId, skuId, qty = 1, addressId }) {
       origin: 'https://mall-h5.xwindlab.com',
       referer: 'https://mall-h5.xwindlab.com/',
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
-      authorization: this.token,
+      authorization: token,
       'x-xf-accept': x_xf_accept,
     },
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
@@ -185,14 +235,58 @@ export async function submit({ spuId, skuId, qty = 1, addressId }) {
     },
   }).catch(error => ({}))
   
-  console.log(checkoutRes.data, 'checkoutRes');
-
-  if (!checkoutRes?.data?.data?.rid) return
-
+  // console.log(checkoutRes.data, 'checkoutRes');
+  
+  if (!checkoutRes?.data?.data?.rid) {
+    console.log('没有rid');
+    console.log(checkoutRes.data, {spuId, skuId,token, qty, addressId, proxyRes})
+    this.submit({spuId, skuId,token, qty, addressId, proxyRes})
+    return
+  }
+  
   const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
-
-  console.log(x_xf_accept1, 'x_xf_accept1')
-
+  
+  try {
+    const batchUpload = await axios({
+      url: 'https://mall-api.xwindlab.com/log/info/batchUpload',
+      method: 'POST',
+      headers: {
+        authority: 'mall-api.xwindlab.com',
+        // accept: '*/*',
+        // 'accept-language': 'zh-CN,zh-Hans;q=0.9',
+        // 'accept-encoding': 'gzip, deflate, br',
+        // 'content-length': 72,
+        // 'content-type': 'application/json;',
+        origin: 'https://mall-h5.xwindlab.com',
+        referer: 'https://mall-h5.xwindlab.com/',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
+        authorization: this.token,
+        // 'x-xf-accept': x_xf_accept,
+      },
+      httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      data: {
+        biz: "mall",
+        bodyList: [
+          JSON.stringify({
+            spuId,
+            skuId,
+            qty,
+            addressId,
+            bankId: 5,
+            rid: checkoutRes.data.data.rid,
+            gbid: this.gbid,
+            cardId: '',
+          })
+        ],
+        event:"click",
+        extra1:"confirm_btn",
+        page:"checkout",
+      },
+    }).catch(error => ({}))
+    // console.log('上报1', 'batchUploadRes')
+  } catch (e) {}
+  
   const commitRes = await axios({
     url: 'https://mall-api.xwindlab.com/order/commit',
     method: 'POST',
@@ -206,7 +300,7 @@ export async function submit({ spuId, skuId, qty = 1, addressId }) {
       origin: 'https://mall-h5.xwindlab.com',
       referer: 'https://mall-h5.xwindlab.com/',
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
-      authorization: this.token,
+      authorization: token,
       'x-xf-accept': x_xf_accept1,
     },
     httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
@@ -227,19 +321,29 @@ export async function submit({ spuId, skuId, qty = 1, addressId }) {
     },
   });
   
-  console.log(commitRes.data);
+  
+  if (commitRes.data.code !== 0) {
+    console.log('下单失败',{
+      qty,
+      skuId,
+      spuId,
+      addressId,
+      "rid": checkoutRes.data.data.rid,
+      gbid: this.gbid,
+      "cardId": "",
+      userId: this.userId,
+      "extra": "",
+      sign: this.sign,
+      "goodsCode": `${spuId}${skuId}`,
+      "bankId": 5
+    }, commitRes.data, spuId, skuId, `http://${proxyIp}:${proxyPort}`)
+    await this.submit({spuId, skuId,token, qty, addressId, proxyRes})
+  } else {
+    console.log('下单成功', spuId, skuId)
+  }
+  
   
 }
 
-
-export async function getMall(fn) {
-
- 
-  submit('eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU2ODkyMjUsInVzZXJJZCI6MjY2OTAyNDI1ODEwODYyNTMsImlhdCI6MTY4NDQ3OTYyNX0.EX0FtFqJNHaYrHYZln6lvFm8ysfgRMGZEgyngG495rCxn56-sNTpRLW85QiDJvWbnWLGR_Z2dF2_7YbJjLg7Nw')
-
-  
-}
-
-// getMall()
 
 

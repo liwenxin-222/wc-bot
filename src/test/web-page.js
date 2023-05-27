@@ -1,8 +1,8 @@
 function setUser() {
-  uni.setStorageSync('token','eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU1NDIxNjgsInVzZXJJZCI6Mzc2NTkzNTI0NTAxOTU1NDYsImlhdCI6MTY4NDMzMjU2OH0.fQMd0c2Bg1J-CvBv7A0-JbD_tC5chP_mnBDzMvZVBERE8kqgtL21KfWyTbfWzCImVaM1C3Cv3cU_w_8214PGIA')
+  uni.setStorageSync('token','eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYxNDY3NzQsInVzZXJJZCI6NDM1Mjg2ODMzMzIzNjI3OSwiaWF0IjoxNjg0OTM3MTc0fQ.jRqSZvSJs9a-ylwTZbZB2Gd_JdF9wueuqQNJpDrGdbdQFcMpitjWtBPHMgOFOYxWPLcFNb8JwK3EUBOwTjqBHA')
   uni.setStorageSync('platform', 'ios');
-  uni.setStorageSync('gbid', '2818726984711887873')
-  uni.setStorageSync('userid', '37659352450195546')
+  uni.setStorageSync('gbid', '2816191933569323441')
+  uni.setStorageSync('userid', '4352868333236279')
 }
 
 async function () {
