@@ -100,7 +100,7 @@ export function kucunChange (list, name) {
       break;
     }
   }
-  console.log(userHasMap, name)
+  console.log(userHasMap, userHasInv, name)
   if (!userHasInv) {
     console.log(list.map((item) => ([item.name, item.hasInv])))
     SendDingTalkUserCantUse(`${name} 失效了。请检查！`)
@@ -134,6 +134,7 @@ export function kucunChange (list, name) {
       h && validList.push(h);
     }
   })
+  console.log(newSourceMap);
   if (validList.length > 0) {
     let str = '### 集市库存更新 \n ';
     

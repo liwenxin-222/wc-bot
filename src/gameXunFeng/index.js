@@ -49,7 +49,7 @@ export async function initXunFeng() {
   });
   
   // setSchedule('0 */1 * * * ?', async () => {
-  setSchedule('* 0/5 * * * ?',() => {
+  setSchedule('0 */5 * * * ?',() => {
     
     if (index >= (TokenMapList.length - 1)) {
       index = 0;
