@@ -337,7 +337,7 @@ export async function submit({spuId, skuId, token, qty = 1, addressId, proxyRes}
       "goodsCode": `${spuId}${skuId}`,
       "bankId": 5
     }, commitRes.data, spuId, skuId, `http://${proxyIp}:${proxyPort}`)
-    await this.submit({spuId, skuId,token, qty, addressId, proxyRes})
+    // await this.submit({spuId, skuId,token, qty, addressId, proxyRes})
   } else {
     console.log('下单成功', spuId, skuId)
   }
