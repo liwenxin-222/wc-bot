@@ -6,6 +6,14 @@ import {SendDingTalkTest} from '../sendDingTalk/index.js';
 const TokenMapList = [
   //
   {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYzODM0MzAsInVzZXJJZCI6NTM1NzA2MDkwMDI5NDI1MTYsImlhdCI6MTY4NTE3MzgzMH0.XaVCPqYIr2S66VG4u2gIOsVJx7StK1N6g8oom8vOwpMSHiTtOBov3ogvUobzZGLY6GhoBXy45ssHFxe_5Oi6YA',
+    name: '老田给我手机的'
+  },
+  {
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYzODMxMDMsInVzZXJJZCI6NTM1NzU2MjIwNTYwNDY1OTgsImlhdCI6MTY4NTE3MzUwM30.WqueMZvE3s2ePeuqMV4t1qG-kMVMrYq53tn1_Og4jNy2wnu_YXq0YPyYaRbI0XKTbSetoIuVSgtWO2yrJfCGpg',
+    name: '老田自己ipad'
+  },
+  {
     Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU0MjUxNDQsInVzZXJJZCI6Mzc2NTkzNTI0NTAxOTU1NDYsImlhdCI6MTY4NDIxNTU0NH0.7o-kKjXb9s334V3YRn3bVv7hzhUJviomMeKTZ7MvgCveS5saOUzBY6Mc-TSBjKKMeks8qhT0r0FMBPDMEIXwHQ',
     name: '我电脑'
   },
@@ -18,15 +26,6 @@ const TokenMapList = [
   {
     Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODUzNjA5MDgsInVzZXJJZCI6NDAwNzA0NjcyODUxODg2MzMsImlhdCI6MTY4NDE1MTMwOH0.8N8vQH5t2KShW7ivTdRD3HB6RdQwN-V4fSZd8oRGGXiQATEdikjiDxi6_ZHd-YAo-nz6jF2QoEzseFQiXC6XFQ',
     name: '郭达'
-  },
-  
-  {
-    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYzODM0MzAsInVzZXJJZCI6NTM1NzA2MDkwMDI5NDI1MTYsImlhdCI6MTY4NTE3MzgzMH0.XaVCPqYIr2S66VG4u2gIOsVJx7StK1N6g8oom8vOwpMSHiTtOBov3ogvUobzZGLY6GhoBXy45ssHFxe_5Oi6YA',
-    name: '老田给我手机的'
-  },
-  {
-    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYzODMxMDMsInVzZXJJZCI6NTM1NzU2MjIwNTYwNDY1OTgsImlhdCI6MTY4NTE3MzUwM30.WqueMZvE3s2ePeuqMV4t1qG-kMVMrYq53tn1_Og4jNy2wnu_YXq0YPyYaRbI0XKTbSetoIuVSgtWO2yrJfCGpg',
-    name: '老田自己ipad'
   },
 ]
 
