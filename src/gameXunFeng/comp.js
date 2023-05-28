@@ -108,10 +108,12 @@ export function kucunChange (list, name) {
   }
   
   const newSourceMap = {};
-  list.filter((item) => {
-    const text = (item && item.sloganMap && item.sloganMap[1]) || '';
-    return (/1[:：][0-9]/.test(text)) || [310].includes(item.id);
-  }).forEach((item) => {
+  list
+  // .filter((item) => {
+  //   const text = (item && item.sloganMap && item.sloganMap[1]) || '';
+  //   return (/1[:：][0-9]/.test(text)) || [310].includes(item.id);
+  // })
+  .forEach((item) => {
     newSourceMap[item.id] = item.inventory || item.hasInv;
   });
 

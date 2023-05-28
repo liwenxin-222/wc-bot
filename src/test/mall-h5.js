@@ -100,7 +100,7 @@ async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
     data: data,
   });
   
-  return response.data.data.t + ';;;;' + 'ios';
+  return response.data.data.t + ';;' + 'ios';
 }
 
 
