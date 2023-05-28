@@ -28,8 +28,12 @@ class User {
 
 async function Suodan() {
   // 周大福
-  // const currentList = [[310, 379], [364, 340], [363, 341]];
-  const currentList = [[468, 640]];
+  const currentList = [
+    [310, 379],
+    [364, 340],
+    [363, 341]
+  ];
+  // const currentList = [[468, 640]];
   const user1 = new User({
     token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MDY2MDYsInVzZXJJZCI6Mzk2ODc2MjE4OTg5MzYzOTQsImlhdCI6MTY4NDU5NzAwNn0.HTY68ZQp6Ns_OZpJkBt3wL5nIWXJMrvUfRDkcaAv_IHGtMvvAwfbs8y_NP411Wem1cgJ3PQEmej_Ks52KoT3vA',
     sign: '275e2a7c71872206ad687795d61fcbd4952ee55203a9da1c85f19d3b3cd25374',
@@ -39,7 +43,7 @@ async function Suodan() {
   })
   // 啊树树
   const currentList2 = [
-    [310, 379],
+    // [310, 379],
     [361, 337],
     [362, 338],
     [365, 339],
@@ -55,13 +59,13 @@ async function Suodan() {
     addressId: 369325,
   })
   // 我的号
-  // const testList = [[468, 640], [499, 711], [517, 740]];
+  // const testList = [[468, 640]];
   // const user3 = new User({
-  //   token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MjM4MTUsInVzZXJJZCI6Mzc2NTkzNTI0NTAxOTU1NDYsImlhdCI6MTY4NDYxNDIxNX0.b0ToD0OZG4Ty5w71DHlfqDYfKJcaVWCZKQtTujhFv-iRJM70PEgalqcCXAcANVcZjm5Ei-GzuhSj6ri-cc02Lw',
-  //   sign: 'e575d7827256aed2023d8cbd132b6c955ac858be0dca01c5a028c6c77442f4e1',
-  //   gbid: '2818726984711887873',
-  //   userId: '37659352450195546',
-  //   addressId: 347214
+  //   token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MDU2MDksInVzZXJJZCI6MjY2OTAyNDI1ODEwODYyNTMsImlhdCI6MTY4NDU5NjAwOX0.SFbafaqTKJaXan8p8LVJFZ4BvyU4nD_5SOqS4hDsXuLTw8dPhG-hffeMVTV1g2Qhnv0r3PqIzV2vYg0sEP-Lvw',
+  //   sign: '3f9db18070e438d7f648deb68a648916fcafd2d411ce83793fb52231f0af5d2e',
+  //   gbid: '2816193124903996609',
+  //   userId: '26690242581086253',
+  //   addressId: 168505
   // })
   // let proxyRes = await proxyW();
   //
@@ -71,15 +75,15 @@ async function Suodan() {
   
   try {
     let proxyRes = await proxyW5Min();
-    currentList.forEach((item) => {
-      user1.buyFun(item, proxyRes)
-    })
+    // currentList.forEach((item) => {
+    //   user1.buyFun(item, proxyRes)
+    // })
     
     // let proxyRes1 = await proxyW5Min();
-    //
-    // currentList2.forEach((item) => {
-    //   user2.buyFun(item, proxyRes1)
-    // })
+
+    currentList2.forEach((item) => {
+      user2.buyFun(item, proxyRes)
+    })
   } catch (e) {
   }
 }
