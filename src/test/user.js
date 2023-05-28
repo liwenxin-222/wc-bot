@@ -28,8 +28,8 @@ class User {
 
 async function Suodan() {
   // 周大福
-  const currentList = [[310, 379], [364, 340], [363, 341]];
-  // const currentList = [[468, 640]];
+  // const currentList = [[310, 379], [364, 340], [363, 341]];
+  const currentList = [[468, 640]];
   const user1 = new User({
     token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MDY2MDYsInVzZXJJZCI6Mzk2ODc2MjE4OTg5MzYzOTQsImlhdCI6MTY4NDU5NzAwNn0.HTY68ZQp6Ns_OZpJkBt3wL5nIWXJMrvUfRDkcaAv_IHGtMvvAwfbs8y_NP411Wem1cgJ3PQEmej_Ks52KoT3vA',
     sign: '275e2a7c71872206ad687795d61fcbd4952ee55203a9da1c85f19d3b3cd25374',
@@ -75,11 +75,11 @@ async function Suodan() {
       user1.buyFun(item, proxyRes)
     })
     
-    let proxyRes1 = await proxyW5Min();
-
-    currentList2.forEach((item) => {
-      user2.buyFun(item, proxyRes1)
-    })
+    // let proxyRes1 = await proxyW5Min();
+    //
+    // currentList2.forEach((item) => {
+    //   user2.buyFun(item, proxyRes1)
+    // })
   } catch (e) {
   }
 }

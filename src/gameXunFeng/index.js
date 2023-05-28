@@ -49,7 +49,7 @@ export async function initXunFeng() {
   });
   
   // setSchedule('0 */1 * * * ?', async () => {
-  setSchedule('0 */5 * * * ?',() => {
+  setSchedule('0 */2 * * * ?',() => {
     
     if (index >= (TokenMapList.length - 1)) {
       index = 0;
@@ -64,7 +64,7 @@ export async function initXunFeng() {
   }
   
   // setSchedule('0 */1 * * * ?', async () => {
-  setSchedule('0/30 * * * * ?', async () => {
+  setSchedule('0/15 * * * * ?', async () => {
     const ttt = getT()
     console.log(ttt);
     let list = [];
