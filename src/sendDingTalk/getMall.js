@@ -397,16 +397,16 @@ export async function getMall(TOKEN) {
   // const randomNum = parseInt(Math.random() * 3);
   // const ttt = TokenMapList[randomNum];
   // console.log('随机的是', randomNum)
-  // const list = await queryGoodsList(x_xf_accept, proxyRes, TOKEN);
+  const list = await queryGoodsList(x_xf_accept, proxyRes, TOKEN);
   
-  const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
-  const detail392 = await getDetail(x_xf_accept, proxyRes, {
-    "skuId": 640,
-    "spuId": 468,
-  }, TOKEN)
+  // const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
+  // const detail392 = await getDetail(x_xf_accept, proxyRes, {
+  //   "skuId": 640,
+  //   "spuId": 468,
+  // }, TOKEN)
   
-  console.log(detail392)
-  // return list
+  // console.log(detail392)
+  return list
   
   // console.log(detail392);
   // detail392.id = detail392.id + '-' + detail392.skuId;
