@@ -24,8 +24,8 @@ const TokenMapList = [
   },
   //   郭达
   {
-    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MjM4MTUsInVzZXJJZCI6Mzc2NTkzNTI0NTAxOTU1NDYsImlhdCI6MTY4NDYxNDIxNX0.b0ToD0OZG4Ty5w71DHlfqDYfKJcaVWCZKQtTujhFv-iRJM70PEgalqcCXAcANVcZjm5Ei-GzuhSj6ri-cc02Lw',
-    name: '海洋'
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU3NTc4MTIsInVzZXJJZCI6NDAwNzA0NjcyODUxODg2MzMsImlhdCI6MTY4NDU0ODIxMn0.25By0GX3J93-9s9BRqxBWf3YV11RN_JVX6JX_XeB4BDthZUgXAJOgqNKWAsqHLiKCWegxzgqQZ-u7YkQ12CPVQ',
+    name: '郭达'
   },
 ]
 
@@ -49,7 +49,7 @@ export async function initXunFeng() {
   });
   
   // setSchedule('0 */1 * * * ?', async () => {
-  setSchedule('0 */4 * * * ?',() => {
+  setSchedule('0 */2 * * * ?',() => {
     
     if (index >= (TokenMapList.length - 1)) {
       index = 0;
@@ -64,7 +64,7 @@ export async function initXunFeng() {
   }
   
   // setSchedule('0 */1 * * * ?', async () => {
-  setSchedule('0/20 * * * * ?', async () => {
+  setSchedule('0/15 * * * * ?', async () => {
     const ttt = getT()
     console.log(ttt);
     let list = [];

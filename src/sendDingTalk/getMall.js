@@ -397,16 +397,16 @@ export async function getMall(TOKEN) {
   // const randomNum = parseInt(Math.random() * 3);
   // const ttt = TokenMapList[randomNum];
   // console.log('随机的是', randomNum)
-  const list = await queryGoodsList(x_xf_accept, proxyRes, TOKEN);
+  // const list = await queryGoodsList(x_xf_accept, proxyRes, TOKEN);
   
-  // const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
-  // const detail392 = await getDetail(x_xf_accept, proxyRes, {
-  //   "skuId": 640,
-  //   "spuId": 468,
-  // }, TOKEN)
+  const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
+  const detail392 = await getDetail(x_xf_accept, proxyRes, {
+    "skuId": 640,
+    "spuId": 468,
+  }, TOKEN)
   
-  // console.log(detail392)
-  return list
+  console.log(detail392)
+  // return list
   
   // console.log(detail392);
   // detail392.id = detail392.id + '-' + detail392.skuId;
@@ -429,7 +429,7 @@ const TokenMapList = [
   },
   //   郭达
   {
-    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODUzNjA5MDgsInVzZXJJZCI6NDAwNzA0NjcyODUxODg2MzMsImlhdCI6MTY4NDE1MTMwOH0.8N8vQH5t2KShW7ivTdRD3HB6RdQwN-V4fSZd8oRGGXiQATEdikjiDxi6_ZHd-YAo-nz6jF2QoEzseFQiXC6XFQ',
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU3NTc4MTIsInVzZXJJZCI6NDAwNzA0NjcyODUxODg2MzMsImlhdCI6MTY4NDU0ODIxMn0.25By0GX3J93-9s9BRqxBWf3YV11RN_JVX6JX_XeB4BDthZUgXAJOgqNKWAsqHLiKCWegxzgqQZ-u7YkQ12CPVQ',
     name: '郭达'
   },
   
