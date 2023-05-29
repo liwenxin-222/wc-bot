@@ -27,9 +27,31 @@ class User {
 // 拉杠箱 [562, 827]
 
 async function Suodan() {
+  
+  const currentList0 = [
+    // [310, 379],
+    [282, 335],
+    [364, 340],
+    [283, 336],
+    [361, 337],
+    [362, 338],
+    [365, 339],
+    [364, 340],
+    [363, 341],
+  ];
+  // const currentList = [[468, 640]];
+  const user0 = new User({
+    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODY1MzI1MTcsInVzZXJJZCI6NDUyOTcxNzI4NDUyMTU3NzYsImlhdCI6MTY4NTMyMjkxN30.ED5nr6rt2b5XLjUN5OXjTYJX3FUfaXNYlWdjKdDm8sDxN9OIt5XYc6LaQGxnZzViNRRwOUDEz4OJ_5Tmx4tiXg',
+    sign: '4fb709c09dbbdc50721e42a5eb7c07f331650e96f369455794bcfa80cba6c058',
+    gbid: '2820979191850205169',
+    userId: '45297172845215776',
+    addressId: 413487,
+  });
+  
+  
   // 周大福
-  const currentList = [
-    [310, 379],
+  const currentList1 = [
+    // [310, 379],
     [364, 340],
     [363, 341]
   ];
@@ -40,15 +62,15 @@ async function Suodan() {
     gbid: '2820978893443259393',
     userId: '39687621898936394',
     addressId: 303131,
-  })
+  });
   // 啊树树
   const currentList2 = [
     // [310, 379],
     [361, 337],
     [362, 338],
-    [365, 339],
-    [364, 340],
-    [363, 341]
+    // [365, 339],
+    // [364, 340],
+    // [363, 341]
   ];
   // const currentList2 = [[468, 640]];
   const user2 = new User({
@@ -75,15 +97,20 @@ async function Suodan() {
   
   try {
     let proxyRes = await proxyW5Min();
-    // currentList.forEach((item) => {
+  
+    currentList0.forEach((item) => {
+      user0.buyFun(item, proxyRes)
+    })
+  
+    // currentList1.forEach((item) => {
     //   user1.buyFun(item, proxyRes)
     // })
-    
-    // let proxyRes1 = await proxyW5Min();
-
-    currentList2.forEach((item) => {
-      user2.buyFun(item, proxyRes)
-    })
+    //
+    // // let proxyRes1 = await proxyW5Min();
+    //
+    // currentList2.forEach((item) => {
+    //   user2.buyFun(item, proxyRes)
+    // })
   } catch (e) {
   }
 }

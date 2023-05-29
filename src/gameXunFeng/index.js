@@ -64,7 +64,7 @@ export async function initXunFeng() {
   }
   
   // setSchedule('0 */1 * * * ?', async () => {
-  setSchedule('0/10 * * * * ?', async () => {
+  setSchedule('0/15 * * * * ?', async () => {
     const ttt = getT()
     console.log(ttt);
     let list = [];
