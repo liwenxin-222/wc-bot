@@ -398,16 +398,16 @@ export async function getMall(TOKEN) {
   // const ttt = TokenMapList[randomNum];
   // console.log('随机的是', randomNum)
   
-  const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
-  const detail392 = await getDetail(x_xf_accept, proxyRes, {
-    "skuId": 640,
-    "spuId": 468,
-  }, TOKEN)
-
-  console.log(detail392.inventory)
+  // const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
+  // const detail392 = await getDetail(x_xf_accept, proxyRes, {
+  //   "skuId": 640,
+  //   "spuId": 468,
+  // }, TOKEN)
+  //
+  // console.log(detail392.inventory)
   
-  // const list = await queryGoodsList(x_xf_accept, proxyRes, TOKEN);
-  // return list
+  const list = await queryGoodsList(x_xf_accept, proxyRes, TOKEN);
+  return list
   
   // console.log(detail392);
   // detail392.id = detail392.id + '-' + detail392.skuId;
@@ -444,6 +444,6 @@ const TokenMapList = [
   },
 ]
 
-getMall('eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYzODMxMDMsInVzZXJJZCI6NTM1NzU2MjIwNTYwNDY1OTgsImlhdCI6MTY4NTE3MzUwM30.WqueMZvE3s2ePeuqMV4t1qG-kMVMrYq53tn1_Og4jNy2wnu_YXq0YPyYaRbI0XKTbSetoIuVSgtWO2yrJfCGpg');
+// getMall('eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYzODMxMDMsInVzZXJJZCI6NTM1NzU2MjIwNTYwNDY1OTgsImlhdCI6MTY4NTE3MzUwM30.WqueMZvE3s2ePeuqMV4t1qG-kMVMrYq53tn1_Og4jNy2wnu_YXq0YPyYaRbI0XKTbSetoIuVSgtWO2yrJfCGpg');
 
 
