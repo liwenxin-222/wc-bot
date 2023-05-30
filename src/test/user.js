@@ -32,12 +32,12 @@ async function Suodan() {
     // [310, 379],
     [282, 335],
     [364, 340],
-    [283, 336],
-    [361, 337],
-    [362, 338],
-    [365, 339],
-    [364, 340],
-    [363, 341],
+    // [283, 336],
+    // [361, 337],
+    // [362, 338],
+    // [365, 339],
+    // [364, 340],
+    // [363, 341],
   ];
   // const currentList = [[468, 640]];
   const user0 = new User({
@@ -81,27 +81,35 @@ async function Suodan() {
     addressId: 369325,
   })
   // 我的号
-  // const testList = [[468, 640]];
-  // const user3 = new User({
-  //   token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MDU2MDksInVzZXJJZCI6MjY2OTAyNDI1ODEwODYyNTMsImlhdCI6MTY4NDU5NjAwOX0.SFbafaqTKJaXan8p8LVJFZ4BvyU4nD_5SOqS4hDsXuLTw8dPhG-hffeMVTV1g2Qhnv0r3PqIzV2vYg0sEP-Lvw',
-  //   sign: '3f9db18070e438d7f648deb68a648916fcafd2d411ce83793fb52231f0af5d2e',
-  //   gbid: '2816193124903996609',
-  //   userId: '26690242581086253',
-  //   addressId: 168505
-  // })
-  // let proxyRes = await proxyW();
-  //
-  // testList.forEach((item) => {
-  //   user3.buyFun(item, proxyRes)
-  // })
+  const testList = [
+    // [282, 335],
+    [283, 336]
+    [361, 337],
+    [362, 338],
+    [365, 339],
+    [364, 340],
+    [363, 341],
+  ];
+  const user3 = new User({
+    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MzkzMDUsInVzZXJJZCI6MjE4MTA2MTQ4NTQ5OTE4OTQsImlhdCI6MTY4NDYyOTcwNX0.LriRFdXewpqvVPAKel5GxkITB4J6Abp-E8MMJO_XVkGmRtJGm_BxaCHGgBntscgwPKAhmT_FQS0uI1XQ0PhPGQ',
+    sign: '99208def958f3ae6e6f0b6948d830d75d9972604b938f870ec3acdf2c36567ef',
+    gbid: '2818726139477759057',
+    userId: '21810614854991894',
+    addressId: 153689
+  })
+  let proxyRes = await proxyW();
+
+  testList.forEach((item) => {
+    user3.buyFun(item, proxyRes)
+  })
   
   try {
-    let proxyRes = await proxyW5Min();
-  
-    currentList0.forEach((item) => {
-      user0.buyFun(item, proxyRes)
-    })
-  
+    // let proxyRes = await proxyW5Min();
+    //
+    // currentList0.forEach((item) => {
+    //   user0.buyFun(item, proxyRes)
+    // })
+    //
     // currentList1.forEach((item) => {
     //   user1.buyFun(item, proxyRes)
     // })

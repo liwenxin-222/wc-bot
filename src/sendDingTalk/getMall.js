@@ -397,16 +397,17 @@ export async function getMall(TOKEN) {
   // const randomNum = parseInt(Math.random() * 3);
   // const ttt = TokenMapList[randomNum];
   // console.log('随机的是', randomNum)
-  const list = await queryGoodsList(x_xf_accept, proxyRes, TOKEN);
   
-  // const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
-  // const detail392 = await getDetail(x_xf_accept, proxyRes, {
-  //   "skuId": 640,
-  //   "spuId": 468,
-  // }, TOKEN)
+  const x_xf_accept1 = await get_x_xf_accept(coded_v20, proxyRes);
+  const detail392 = await getDetail(x_xf_accept, proxyRes, {
+    "skuId": 640,
+    "spuId": 468,
+  }, TOKEN)
+
+  console.log(detail392.inventory)
   
-  // console.log(detail392)
-  return list
+  // const list = await queryGoodsList(x_xf_accept, proxyRes, TOKEN);
+  // return list
   
   // console.log(detail392);
   // detail392.id = detail392.id + '-' + detail392.skuId;
@@ -419,7 +420,7 @@ export async function getMall(TOKEN) {
 const TokenMapList = [
   //
   {
-    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU0MjUxNDQsInVzZXJJZCI6Mzc2NTkzNTI0NTAxOTU1NDYsImlhdCI6MTY4NDIxNTU0NH0.7o-kKjXb9s334V3YRn3bVv7hzhUJviomMeKTZ7MvgCveS5saOUzBY6Mc-TSBjKKMeks8qhT0r0FMBPDMEIXwHQ',
+    Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MDU2MDksInVzZXJJZCI6MjY2OTAyNDI1ODEwODYyNTMsImlhdCI6MTY4NDU5NjAwOX0.SFbafaqTKJaXan8p8LVJFZ4BvyU4nD_5SOqS4hDsXuLTw8dPhG-hffeMVTV1g2Qhnv0r3PqIzV2vYg0sEP-Lvw',
     name: '我电脑'
   },
   //
@@ -443,6 +444,6 @@ const TokenMapList = [
   },
 ]
 
-// getMall(TokenMapList[2].Authorization);
+getMall('eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYzODMxMDMsInVzZXJJZCI6NTM1NzU2MjIwNTYwNDY1OTgsImlhdCI6MTY4NTE3MzUwM30.WqueMZvE3s2ePeuqMV4t1qG-kMVMrYq53tn1_Og4jNy2wnu_YXq0YPyYaRbI0XKTbSetoIuVSgtWO2yrJfCGpg');
 
 

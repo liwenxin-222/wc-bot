@@ -40,7 +40,7 @@ export const buyFun = async function([spuId, skuId], proxyRes) {
     this.submit({ spuId, skuId, token: this.token, qty: 1, addressId: this.addressId, proxyRes})
   } catch (e) {
     console.log(e);
-    await buyFun(spuId);
+    // await buyFun(spuId);
   }
  
 }

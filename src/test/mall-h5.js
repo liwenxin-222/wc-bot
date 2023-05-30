@@ -239,8 +239,9 @@ export async function submit({spuId, skuId, token, qty = 1, addressId, proxyRes}
   
   if (!checkoutRes?.data?.data?.rid) {
     console.log('没有rid');
-    console.log(checkoutRes.data, {spuId, skuId,token, qty, addressId, proxyRes})
-    this.submit({spuId, skuId,token, qty, addressId, proxyRes})
+    console.log(checkoutRes.data, {spuId, skuId,token, qty, addressId, proxyRes});
+    // TODO 这里重点
+    // this.submit({spuId, skuId,token, qty, addressId, proxyRes})
     return
   }
   
