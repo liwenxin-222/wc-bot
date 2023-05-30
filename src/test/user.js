@@ -53,7 +53,7 @@ async function Suodan() {
   const currentList1 = [
     // [310, 379],
     [364, 340],
-    [363, 341]
+    // [363, 341]
   ];
   // const currentList = [[468, 640]];
   const user1 = new User({
