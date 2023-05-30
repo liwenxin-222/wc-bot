@@ -1,6 +1,7 @@
 import {getAddress, buyFun} from './getList.js'
 import {submit} from './mall-h5.js'
-import {proxyW, proxyW5Min} from '../sendDingTalk/getProxy.js'
+import {proxyW, proxyW5Min, getMultipleProxy} from '../sendDingTalk/getProxy.js'
+import { users } from './user/index.js'
 
 class User {
   constructor({token, sign, gbid, userId, addressId}) {
@@ -27,6 +28,21 @@ class User {
 // 拉杠箱 [562, 827]
 
 async function Suodan() {
+
+  let proxys = await getMultipleProxy()
+
+  users.forEach(({ currentList, ...user }, index) => {
+    let idx = index > (proxys.length - 1) ? (index % proxys.length)  : index
+    let _user = new User(user)
+
+    let { realIp, port } = proxys[idx]
+
+    currentList.forEach((good) => {
+      _user.buyFun(good, [realIp, port])
+    });
+  })
+
+  return
   
   const currentList0 = [
     // [310, 379],
