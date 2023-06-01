@@ -72,7 +72,7 @@ export async function initXunFeng() {
       list = await getMall(ttt.Authorization);
     } catch (e) {
       console.log('失败')
-      errorMessage('抓取失败1')
+      errorMessage(e);
     }
     
     if (list && list.length) {
@@ -81,7 +81,7 @@ export async function initXunFeng() {
       xinping(list);
       kucunChange(list, ttt.name);
     } else {
-      errorMessage('抓取失败2')
+      // errorMessage('抓取失败2')
     }
   })
   
