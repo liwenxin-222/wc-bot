@@ -85,9 +85,9 @@ async function Suodan() {
     // [282, 335],
     [283, 336]
     [361, 337],
-    [362, 338],
+    // [362, 338],
     [365, 339],
-    [364, 340],
+    // [364, 340],
     [363, 341],
   ];
   const user3 = new User({
@@ -102,7 +102,26 @@ async function Suodan() {
   testList.forEach((item) => {
     user3.buyFun(item, proxyRes)
   })
-  
+  //
+  // 啊树树大号
+  // const ashushudahaoList = [
+  //   [468, 640],
+  //   // [282, 335],
+  //   // [283, 336]
+  // ];
+  // const ashushudahao = new User({
+  //   token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MzU0NjAsInVzZXJJZCI6NTgwMTE0MDIyNzM5OTY4LCJpYXQiOjE2ODQ2MjU4NjB9.JwcdJYd8EaMmD6xV_R7Z3E9hyhaswTp7NOH6hHtt_bRE9tfzjPlFLu973l2_ZVaU6MllD8uo2GCDvBK1tX75yQ',
+  //   sign: '42cdbaa08d1e64c66e1bea9a3cbbede04a48cd9a51f7d2c61436e0c76a5b7e69',
+  //   gbid: '2820695332475423904',
+  //   userId: '580114022739968',
+  //   addressId: 56048
+  // })
+  // let ashushudahaoProxy = await proxyW();
+  //
+  // ashushudahaoList.forEach((item) => {
+  //   ashushudahao.buyFun(item, ashushudahaoProxy)
+  // })
+
   try {
     // let proxyRes = await proxyW5Min();
     //

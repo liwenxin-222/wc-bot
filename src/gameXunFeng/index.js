@@ -1,6 +1,6 @@
 import {setSchedule} from './schedule/index.js';
 import {getMall} from '../sendDingTalk/getMall.js';
-import {xinping, kucunChange} from './comp.js';
+import {xinping, kucunChange, errorMessage} from './comp.js';
 import {SendDingTalkTest} from '../sendDingTalk/index.js';
 
 const TokenMapList = [
@@ -72,6 +72,7 @@ export async function initXunFeng() {
       list = await getMall(ttt.Authorization);
     } catch (e) {
       console.log('失败')
+      errorMessage('抓取失败1')
     }
     
     if (list && list.length) {
@@ -79,6 +80,8 @@ export async function initXunFeng() {
       
       xinping(list);
       kucunChange(list, ttt.name);
+    } else {
+      errorMessage('抓取失败2')
     }
   })
   

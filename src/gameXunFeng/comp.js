@@ -166,3 +166,8 @@ export function kucunChange (list, name) {
   currentSourceMap = Object.assign({}, newSourceMap);
   
 }
+
+
+export function errorMessage(text) {
+  SendDingTalkMarkdown('集市->' + text);
+}

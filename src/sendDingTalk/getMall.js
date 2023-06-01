@@ -183,100 +183,106 @@ async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
   //   'size': '40',
   // }
   
-  const response1 = await axios({
-    url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
-    method: 'POST',
-    headers,
-    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    data: JSON.stringify({
-      orderBy: "SORT_DESC",
-      page: 1,
-      resourceId: 6,
-      size: 30
-    }),
-    // timeout: 10000,
-  })
+  try {
+    const response1 = await axios({
+      url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
+      method: 'POST',
+      headers,
+      // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      data: JSON.stringify({
+        orderBy: "SORT_DESC",
+        page: 1,
+        resourceId: 6,
+        size: 30
+      }),
+      // timeout: 10000,
+    })
   
-  const response11 = await axios({
-    url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
-    method: 'POST',
-    headers,
-    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    data: JSON.stringify({
-      orderBy: "SORT_DESC",
-      page: 2,
-      resourceId: 6,
-      size: 30
-    }),
-    // timeout: 10000,
-  })
+    const response11 = await axios({
+      url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
+      method: 'POST',
+      headers,
+      // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      data: JSON.stringify({
+        orderBy: "SORT_DESC",
+        page: 2,
+        resourceId: 6,
+        size: 30
+      }),
+      // timeout: 10000,
+    })
   
-  const response2 = await axios({
-    url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
-    method: 'post',
-    headers,
-    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    data: JSON.stringify({
-      orderBy: "SORT_DESC",
-      page: 1,
-      resourceId: 7,
-      size: 30
-    }),
-    // timeout: 10000,
-  })
+    const response2 = await axios({
+      url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
+      method: 'post',
+      headers,
+      // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      data: JSON.stringify({
+        orderBy: "SORT_DESC",
+        page: 1,
+        resourceId: 7,
+        size: 30
+      }),
+      // timeout: 10000,
+    })
   
-  const response3 = await axios({
-    url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
-    method: 'post',
-    headers,
-    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    data: JSON.stringify({
-      orderBy: "SORT_DESC",
-      page: 1,
-      resourceId: 5,
-      size: 30
-    }),
-    // timeout: 10000,
-  })
+    const response3 = await axios({
+      url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
+      method: 'post',
+      headers,
+      // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      data: JSON.stringify({
+        orderBy: "SORT_DESC",
+        page: 1,
+        resourceId: 5,
+        size: 30
+      }),
+      // timeout: 10000,
+    })
   
-  const response31 = await axios({
-    url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
-    method: 'post',
-    headers,
-    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    data: JSON.stringify({
-      orderBy: "SORT_DESC",
-      page: 2,
-      resourceId: 5,
-      size: 30
-    }),
-    // timeout: 10000,
-  })
+    const response31 = await axios({
+      url: 'https://mall-api.xwindlab.com/goods/queryGoodsListByDisplayResource',
+      method: 'post',
+      headers,
+      // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      data: JSON.stringify({
+        orderBy: "SORT_DESC",
+        page: 2,
+        resourceId: 5,
+        size: 30
+      }),
+      // timeout: 10000,
+    })
   
-  // console.log(response.data.data.list, 4444);
+    // console.log(response.data.data.list, 4444);
   
-  return [
-    ...response1.data.data.list,
-    ...response11.data.data.list,
-    ...response2.data.data.list,
-    ...response3.data.data.list,
-    ...response31.data.data.list,
-  ];
+    return [
+      ...response1.data.data.list,
+      ...response11.data.data.list,
+      ...response2.data.data.list,
+      ...response3.data.data.list,
+      ...response31.data.data.list,
+    ];
+  } catch (e) {
+    return []
+  }
+  
+
   // print(response.json())
   // return response.json()
 }
