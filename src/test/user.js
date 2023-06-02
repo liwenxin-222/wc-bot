@@ -34,11 +34,10 @@ async function Suodan() {
   users.forEach(({ currentList, ...user }, index) => {
     let idx = index > (proxys.length - 1) ? (index % proxys.length)  : index
     let _user = new User(user)
-
-    let { realIp, port } = proxys[idx]
+    let { ip, port } = proxys[idx]
 
     currentList.forEach((good) => {
-      _user.buyFun(good, [realIp, port])
+      _user.buyFun(good, [ip, port])
     });
   })
 
