@@ -3,12 +3,13 @@ import {submit} from './mall-h5.js'
 import {proxyW, proxyW5Min} from '../sendDingTalk/getProxy.js'
 
 class User {
-  constructor({token, sign, gbid, userId, addressId}) {
+  constructor({token, sign, gbid, userId, addressId, name}) {
     this.token = token
     this.sign = sign
     this.gbid = gbid
     this.userId = userId
     this.addressId = addressId
+    this.name = name;
     
     this.getAddress = getAddress
     this.submit = submit
@@ -27,13 +28,14 @@ class User {
 // 拉杠箱 [562, 827]
 
 async function Suodan() {
-  
+  // 周大福
   const currentList0 = [
+    // [468, 640],
+    
     // [310, 379],
     [282, 335],
-    [364, 340],
-    // [283, 336],
-    // [361, 337],
+    [283, 336],
+    [361, 337],
     // [362, 338],
     // [365, 339],
     // [364, 340],
@@ -41,49 +43,43 @@ async function Suodan() {
   ];
   // const currentList = [[468, 640]];
   const user0 = new User({
-    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODY1MzI1MTcsInVzZXJJZCI6NDUyOTcxNzI4NDUyMTU3NzYsImlhdCI6MTY4NTMyMjkxN30.ED5nr6rt2b5XLjUN5OXjTYJX3FUfaXNYlWdjKdDm8sDxN9OIt5XYc6LaQGxnZzViNRRwOUDEz4OJ_5Tmx4tiXg',
-    sign: '4fb709c09dbbdc50721e42a5eb7c07f331650e96f369455794bcfa80cba6c058',
-    gbid: '2820979191850205169',
-    userId: '45297172845215776',
-    addressId: 413487,
+    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODY4NzYzMzEsInVzZXJJZCI6NDgwNzY2Njg2NDQxNjM2MjUsImlhdCI6MTY4NTY2NjczMX0._zwIDC07Gi9EZnU7PYnArd0p5M80eRwywFuHubJrM5iTInsCyQjOQI97TFCpxlDJws5Wg_jnR-54kvYlY5ieFw',
+    sign: 'edade609d9faff707f43899189d7d8565db4a859caefc2fcb805c9bd6b2d0823',
+    gbid: '2820979340079592897',
+    userId: '48076668644163625',
+    addressId: 420221,
+    name: '表妹'
   });
   
-  
-  // 周大福
-  const currentList1 = [
-    // [310, 379],
-    [364, 340],
-    // [363, 341]
-  ];
-  // const currentList = [[468, 640]];
-  const user1 = new User({
-    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MDY2MDYsInVzZXJJZCI6Mzk2ODc2MjE4OTg5MzYzOTQsImlhdCI6MTY4NDU5NzAwNn0.HTY68ZQp6Ns_OZpJkBt3wL5nIWXJMrvUfRDkcaAv_IHGtMvvAwfbs8y_NP411Wem1cgJ3PQEmej_Ks52KoT3vA',
-    sign: '275e2a7c71872206ad687795d61fcbd4952ee55203a9da1c85f19d3b3cd25374',
-    gbid: '2820978893443259393',
-    userId: '39687621898936394',
-    addressId: 303131,
-  });
-  // 啊树树
-  const currentList2 = [
-    // [310, 379],
-    [361, 337],
-    [362, 338],
-    // [365, 339],
-    // [364, 340],
-    // [363, 341]
-  ];
-  // const currentList2 = [[468, 640]];
-  const user2 = new User({
-    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODYyMjQ3NjksInVzZXJJZCI6NDUyOTk4NDU1OTQxMzY1OTQsImlhdCI6MTY4NTAxNTE2OX0.ELFQwu2UHUVDJunsPIXZnG6EGU5wb_t5K2jTr6gNSNsHrrVeAbtNxCWbIS6FL5B5nLecCEZCsxRFjabTEqprDQ',
-    sign: 'a3566616578d7f4f984205dce04e001bd074a0e0880a70ec7121b967c90ed190',
-    gbid: '2820979191975027665',
-    userId: '45299845594136594',
-    addressId: 369325,
+  let proxyRes0 = await proxyW5Min();
+
+  currentList0.forEach((item) => {
+    user0.buyFun(item, proxyRes0)
   })
-  // 我的号
+  
+  // 啊树树大号
+  // const ashushudahaoList = [
+  //   [468, 640],
+  //   // [282, 335],
+  //   // [283, 336]
+  // ];
+  // const ashushudahao = new User({
+  //   token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODY4Nzk2MzgsInVzZXJJZCI6NTgwMTE0MDIyNzM5OTY4LCJpYXQiOjE2ODU2NzAwMzh9.8YifRtyIxqpBSbTJ5jIs1B7AtUx0UQT265DWrGSt5G-MPwUaco42c3LFVd_Aen7s13aSDhIf0qaNrZ2T8MDHqQ',
+  //   sign: '42cdbaa08d1e64c66e1bea9a3cbbede04a48cd9a51f7d2c61436e0c76a5b7e69',
+  //   gbid: '2820695332475423904',
+  //   userId: '580114022739968',
+  //   addressId: 56048
+  // })
+  // let ashushudahaoProxy = await proxyW();
+  //
+  // ashushudahaoList.forEach((item) => {
+  //   ashushudahao.buyFun(item, ashushudahaoProxy)
+  // })
+  
+   // 我的号
   const testList = [
     // [282, 335],
-    [283, 336]
+    [283, 336],
     [361, 337],
     // [362, 338],
     [365, 339],
@@ -95,52 +91,40 @@ async function Suodan() {
     sign: '99208def958f3ae6e6f0b6948d830d75d9972604b938f870ec3acdf2c36567ef',
     gbid: '2818726139477759057',
     userId: '21810614854991894',
-    addressId: 153689
+    addressId: 153689,
+    name: '我'
   })
   let proxyRes = await proxyW();
 
   testList.forEach((item) => {
     user3.buyFun(item, proxyRes)
   })
-  //
-  // 啊树树大号
-  // const ashushudahaoList = [
-  //   [468, 640],
-  //   // [282, 335],
-  //   // [283, 336]
-  // ];
-  // const ashushudahao = new User({
-  //   token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MzU0NjAsInVzZXJJZCI6NTgwMTE0MDIyNzM5OTY4LCJpYXQiOjE2ODQ2MjU4NjB9.JwcdJYd8EaMmD6xV_R7Z3E9hyhaswTp7NOH6hHtt_bRE9tfzjPlFLu973l2_ZVaU6MllD8uo2GCDvBK1tX75yQ',
-  //   sign: '42cdbaa08d1e64c66e1bea9a3cbbede04a48cd9a51f7d2c61436e0c76a5b7e69',
-  //   gbid: '2820695332475423904',
-  //   userId: '580114022739968',
-  //   addressId: 56048
-  // })
-  // let ashushudahaoProxy = await proxyW();
-  //
-  // ashushudahaoList.forEach((item) => {
-  //   ashushudahao.buyFun(item, ashushudahaoProxy)
-  // })
 
-  try {
-    // let proxyRes = await proxyW5Min();
-    //
-    // currentList0.forEach((item) => {
-    //   user0.buyFun(item, proxyRes)
-    // })
-    //
-    // currentList1.forEach((item) => {
-    //   user1.buyFun(item, proxyRes)
-    // })
-    //
-    // // let proxyRes1 = await proxyW5Min();
-    //
-    // currentList2.forEach((item) => {
-    //   user2.buyFun(item, proxyRes)
-    // })
-  } catch (e) {
-  }
+
 }
 
-Suodan();
+
+async function ceshi() {
+  const testList = [
+    [468, 640],
+  ];
+  // const currentList = [[468, 640]];
+  const testUser = new User({
+    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJleHAiOjE2ODU4MDU2MDksInVzZXJJZCI6MjY2OTAyNDI1ODEwODYyNTMsImlhdCI6MTY4NDU5NjAwOX0.SFbafaqTKJaXan8p8LVJFZ4BvyU4nD_5SOqS4hDsXuLTw8dPhG-hffeMVTV1g2Qhnv0r3PqIzV2vYg0sEP-Lvw',
+    sign: '3f9db18070e438d7f648deb68a648916fcafd2d411ce83793fb52231f0af5d2e',
+    gbid: '2816193124903996609',
+    userId: '26690242581086253',
+    addressId: 168505,
+    name: '测试账号'
+  });
+  
+  let proxyRes0 = await proxyW5Min();
+  
+  testList.forEach((item) => {
+    testUser.buyFun(item, proxyRes0)
+  })
+  
+}
+ceshi();
+// Suodan();
 export default Suodan;

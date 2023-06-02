@@ -2,6 +2,18 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import HttpsProxyAgent from 'https-proxy-agent';
 import {proxyW} from '../sendDingTalk/getProxy.js';
+import pino from 'pino';
+
+
+const LOG = pino({
+      // prettyPrint: {
+      //   colorize: true,
+      //   levelFirst: true,
+      //   translateTime: "yyyy-dd-mm, h:MM:ss TT",
+      // },
+    },
+    pino.destination("./suodan-logger.log")
+);
 
 // import { token, sign, gbid, userId } from './env.js'
 
@@ -143,7 +155,7 @@ async function getDetail(x_xf_accept, [proxyIp, proxyPort], params, token) {
   return response.data.data;
 }
 
-export async function submit({spuId, skuId, token, qty = 1, addressId, proxyRes}) {
+export async function submit({spuId, skuId, token, qty = 1, addressId, proxyRes, name}) {
   const data_bdms_faccdee21b68 = await get_data_bdms_faccdee21b68();
   const coded_v20 = get_coded_v20(data_bdms_faccdee21b68);
   
@@ -239,7 +251,8 @@ export async function submit({spuId, skuId, token, qty = 1, addressId, proxyRes}
   
   if (!checkoutRes?.data?.data?.rid) {
     console.log('没有rid');
-    console.log(checkoutRes.data, {spuId, skuId,token, qty, addressId, proxyRes});
+    // console.log(checkoutRes.data, {spuId, skuId,token, qty, addressId, proxyRes});
+    LOG.info(`下单失败 ${name} ${spuId}-${skuId}`);
     // TODO 这里重点
     // this.submit({spuId, skuId,token, qty, addressId, proxyRes})
     return
@@ -287,7 +300,7 @@ export async function submit({spuId, skuId, token, qty = 1, addressId, proxyRes}
     }).catch(error => ({}))
     // console.log('上报1', 'batchUploadRes')
   } catch (e) {}
-  
+  console.log(x_xf_accept1, 'x_xf_accept1')
   const commitRes = await axios({
     url: 'https://mall-api.xwindlab.com/order/commit',
     method: 'POST',
@@ -324,6 +337,8 @@ export async function submit({spuId, skuId, token, qty = 1, addressId, proxyRes}
   
   
   if (commitRes.data.code !== 0) {
+    LOG.info(`下单失败 ${name} ${spuId}-${skuId}`);
+    
     console.log('下单失败',{
       qty,
       skuId,
@@ -336,11 +351,12 @@ export async function submit({spuId, skuId, token, qty = 1, addressId, proxyRes}
       "extra": "",
       sign: this.sign,
       "goodsCode": `${spuId}${skuId}`,
-      "bankId": 5
+      // "bankId": 5
     }, commitRes.data, spuId, skuId, `http://${proxyIp}:${proxyPort}`)
     // await this.submit({spuId, skuId,token, qty, addressId, proxyRes})
   } else {
     console.log('下单成功', spuId, skuId)
+    LOG.info(`下单成功 ${name} ${spuId}-${skuId}`);
   }
   
   

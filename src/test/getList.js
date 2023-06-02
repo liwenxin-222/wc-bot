@@ -37,7 +37,7 @@ export const buyFun = async function([spuId, skuId], proxyRes) {
   
     // let count = detailRes?.data?.data?.skuActivityInfoVO?.limitPerUser || 1 //购买数量
     // console.log(777777, { spuId, skuId, token: this.token, qty: 1, addressId: this.addressId, proxyRes});
-    this.submit({ spuId, skuId, token: this.token, qty: 1, addressId: this.addressId, proxyRes})
+    this.submit({ spuId, skuId, token: this.token, qty: 1, addressId: this.addressId, proxyRes, name: this.name})
   } catch (e) {
     console.log(e);
     // await buyFun(spuId);
