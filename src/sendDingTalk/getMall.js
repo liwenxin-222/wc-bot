@@ -108,53 +108,57 @@ function get_coded_v20(x) {
   return "CODED--v20" + c;
 }
 
-async function get_x_xf_accept(coded_v20, [proxyIp, proxyPort]) {
-  const cookies = {
-// # 'BAIDUID_BFESS': 'A2FF4A80869FFABDD818270868A78818:FG=1',
-// # 'ZFY': 'GLNdf6FCQoG84p0SASf:A1FNy1VvkTpiXrp2dDzPeI:Bo:C',
-// # 'ab_sr': '1.0.1_ODJiZDlhMDIwYmVmMGNiNjk3ZGE1NGFjODNlYTA5Y2M5MzQxM2EyMWU0ZmRjN2Q0MzlhYzVlMTcyYTM3YzI4NGU1OTc3YWYxMGNmNzBhMDUwZDIyYzZkZTI5MjFlMmI3MGZiNDg2NzdlZWVhZTFmMzJlNGNjODc2MjAyMGUwY2E4OWNmNWNlMTI0NDBmMGNhYmQxOWIxOTZiNTM5NDE3Zg==',
+const get_x_xf_accept = (function() {
+  let xfAccept = void 0
+
+  return async (coded_v20, [proxyIp, proxyPort]) => {
+    const cookies = {
+  // # 'BAIDUID_BFESS': 'A2FF4A80869FFABDD818270868A78818:FG=1',
+  // # 'ZFY': 'GLNdf6FCQoG84p0SASf:A1FNy1VvkTpiXrp2dDzPeI:Bo:C',
+  // # 'ab_sr': '1.0.1_ODJiZDlhMDIwYmVmMGNiNjk3ZGE1NGFjODNlYTA5Y2M5MzQxM2EyMWU0ZmRjN2Q0MzlhYzVlMTcyYTM3YzI4NGU1OTc3YWYxMGNmNzBhMDUwZDIyYzZkZTI5MjFlMmI3MGZiNDg2NzdlZWVhZTFmMzJlNGNjODc2MjAyMGUwY2E4OWNmNWNlMTI0NDBmMGNhYmQxOWIxOTZiNTM5NDE3Zg==',
+    }
+    
+    const headers = {
+  //    'authority': 'sofire.baidu.com',
+  //    'accept': '*/*',
+  //    'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+  //    'cache-control': 'no-cache',
+  //    'content-type': 'text/plain',
+  // # Requests sorts cookies= alphabetically
+  // # 'cookie': 'BAIDUID_BFESS=A2FF4A80869FFABDD818270868A78818:FG=1; ZFY=GLNdf6FCQoG84p0SASf:A1FNy1VvkTpiXrp2dDzPeI:Bo:C; ab_sr=1.0.1_ODJiZDlhMDIwYmVmMGNiNjk3ZGE1NGFjODNlYTA5Y2M5MzQxM2EyMWU0ZmRjN2Q0MzlhYzVlMTcyYTM3YzI4NGU1OTc3YWYxMGNmNzBhMDUwZDIyYzZkZTI5MjFlMmI3MGZiNDg2NzdlZWVhZTFmMzJlNGNjODc2MjAyMGUwY2E4OWNmNWNlMTI0NDBmMGNhYmQxOWIxOTZiNTM5NDE3Zg==',
+  //    'origin': 'https://mall-h5.xwindlab.com',
+  //    'pragma': 'no-cache',
+  //    'referer': 'https://mall-h5.xwindlab.com/',
+  //    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
+  //    'sec-ch-ua-mobile': '?0',
+  //    'sec-ch-ua-platform': '"Windows"',
+  //    'sec-fetch-dest': 'empty',
+  //    'sec-fetch-mode': 'cors',
+  //    'sec-fetch-site': 'cross-site',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
+    }
+    
+    const data = coded_v20;
+    // console.log(data, 'coded_v20')
+    
+    const response = await axios({
+      url: 'https://sofire.baidu.com/abot/api/v1/tpl/commit',
+      method: 'POST',
+      // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
+      httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
+      headers: {
+        ...headers,
+        ...cookies,
+      },
+      data: data,
+    }).catch(error => void 0)
+    if (response) xfAccept = `${response.data.data.t};;ios`
+
+    return xfAccept
   }
-  
-  const headers = {
-//    'authority': 'sofire.baidu.com',
-//    'accept': '*/*',
-//    'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
-//    'cache-control': 'no-cache',
-//    'content-type': 'text/plain',
-// # Requests sorts cookies= alphabetically
-// # 'cookie': 'BAIDUID_BFESS=A2FF4A80869FFABDD818270868A78818:FG=1; ZFY=GLNdf6FCQoG84p0SASf:A1FNy1VvkTpiXrp2dDzPeI:Bo:C; ab_sr=1.0.1_ODJiZDlhMDIwYmVmMGNiNjk3ZGE1NGFjODNlYTA5Y2M5MzQxM2EyMWU0ZmRjN2Q0MzlhYzVlMTcyYTM3YzI4NGU1OTc3YWYxMGNmNzBhMDUwZDIyYzZkZTI5MjFlMmI3MGZiNDg2NzdlZWVhZTFmMzJlNGNjODc2MjAyMGUwY2E4OWNmNWNlMTI0NDBmMGNhYmQxOWIxOTZiNTM5NDE3Zg==',
-//    'origin': 'https://mall-h5.xwindlab.com',
-//    'pragma': 'no-cache',
-//    'referer': 'https://mall-h5.xwindlab.com/',
-//    'sec-ch-ua': '"Microsoft Edge";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',
-//    'sec-ch-ua-mobile': '?0',
-//    'sec-ch-ua-platform': '"Windows"',
-//    'sec-fetch-dest': 'empty',
-//    'sec-fetch-mode': 'cors',
-//    'sec-fetch-site': 'cross-site',
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62',
-  }
-  
-  const data = coded_v20;
-  // console.log(data, 'coded_v20')
-  
-  const response = await axios({
-    url: 'https://sofire.baidu.com/abot/api/v1/tpl/commit',
-    method: 'POST',
-    // httpAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    // httpsAgent: new HttpsProxyAgent(`http://${username}:${password}@${proxyIp}:${proxyPort}`),
-    httpsAgent: new HttpsProxyAgent(`http://${proxyIp}:${proxyPort}`),
-    headers: {
-      ...headers,
-      ...cookies,
-    },
-    data: data,
-  });
-  
-  // console.log(response.data, 3333);
-  return response.data.data.t + ';;' + 'ios';
-}
+})()
 
 async function queryGoodsList(x_xf_accept, [proxyIp, proxyPort], token) {
   // console.log(x_xf_accept, 'token')

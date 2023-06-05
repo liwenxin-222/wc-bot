@@ -2,6 +2,17 @@ import {setSchedule} from './schedule/index.js';
 import {getMall} from '../sendDingTalk/getMall.js';
 import {xinping, kucunChange, errorMessage} from './comp.js';
 import {SendDingTalkTest} from '../sendDingTalk/index.js';
+import pino from 'pino';
+
+const LOG = pino({
+      // prettyPrint: {
+      //   colorize: true,
+      //   levelFirst: true,
+      //   translateTime: "yyyy-dd-mm, h:MM:ss TT",
+      // },
+    },
+    pino.destination("./error.log")
+);
 
 const TokenMapList = [
   //
@@ -71,6 +82,7 @@ export async function initXunFeng() {
     try {
       list = await getMall(ttt.Authorization);
     } catch (e) {
+      LOG.info(e)
       console.log('失败')
       errorMessage(e);
     }
