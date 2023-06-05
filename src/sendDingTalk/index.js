@@ -67,7 +67,7 @@ export const SendDingTalkMarkdown = (text, {isAtAll = false} = {}) => {
 export const SendDingTalkUserCantUse = (text, {isAtAll = false} = {}) => {
  
   const robotXun = new ChatBot({
-    webhook: 'https://oapi.dingtalk.com/robot/send?access_token=b4b439fd1fed677758c92910c5dd77210ee720245fec6507611a1d7e4c6191d6'
+    webhook: 'https://oapi.dingtalk.com/robot/send?access_token=196cf577658f5dc1cd8d69bbeb802a99f22008f6ecf4f845578ca06ab7dc2818'
   });
 
   robotXun.markdown('监控失效通知', text, {

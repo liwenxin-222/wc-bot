@@ -20,7 +20,6 @@ export function xinping(list) {
   const newItemIds = list.map((item) => {
     return item.id;
   });
-  console.log(1123)
   if (currentItemIds.length === 0) {
     currentItemIds = newItemIds;
     console.log('新品通知，第一次，不提醒')
